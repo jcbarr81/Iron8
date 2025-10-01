@@ -90,6 +90,9 @@ class SimRequest(BaseModel):
     seed: Optional[int] = None
 
 class SimResponse(BaseModel):
+    # allow field names like "model_version" without warnings
+    model_config = ConfigDict(protected_namespaces=())
+
     model_version: str
     probs: Dict[str, float]
     sampled_event: str
