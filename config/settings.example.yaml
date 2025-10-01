@@ -1,0 +1,17 @@
+model:
+  artifact_dir: "artifacts"
+  pa_model_path: "artifacts/pa_model.joblib"
+  calibrator_path: "artifacts/pa_calibrator.joblib"
+  use_onnx: false
+  onnx_path: "artifacts/pa_model.onnx"
+
+service:
+  host: "0.0.0.0"
+  port: 8000
+
+simulation:
+  enable_bip: false
+  enable_advancement: false
+  rules:
+    shift_restrictions: true
+    extras_runner_on_2nd: true

@@ -1,0 +1,8 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "Serve (uvicorn)", "type": "shell", "command": "make serve", "group": "build", "problemMatcher": [] },
+    { "label": "Test (pytest)",   "type": "shell", "command": "make test",  "group": "test",  "problemMatcher": [] },
+    { "label": "Train (stub)",    "type": "shell", "command": "make train", "group": "build", "problemMatcher": [] }
+  ]
+}

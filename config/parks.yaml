@@ -1,0 +1,7 @@
+# Example directional park hints (placeholder)
+GEN:
+  rf_short_porches: false
+  lf_short_porches: false
+BOS05:
+  rf_short_porches: true
+  lf_short_porches: false
