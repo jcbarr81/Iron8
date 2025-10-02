@@ -76,8 +76,15 @@ def plate_appearance(req: SimRequest):
     c_feats = context_features(req.state, req.pitcher)
     feats = {**b_feats, **p_feats, **c_feats}
 
-    # TODO(Codex): add context features (count/base/outs/park/rules)
-    # TODO(Codex): RISP gating only if bases include runner on 2B or 3B
+    # Apply RISP gating: batter RISP bonus only counts when a runner is on 2B or 3B
+    if "bat_risp_z" in feats:
+        try:
+            risp_gate = float(c_feats.get("ctx_is_risp", 0) or 0.0)
+        except Exception:
+            risp_gate = 0.0
+        feats["bat_risp_z"] = float(feats["bat_risp_z"] or 0.0) * risp_gate
+
+    # TODO(Codex): add more context features (park/rules/handedness effects)
 
     probs = _pa_model.predict_proba(feats)
     probs = _calib.apply(probs, slice_meta=None)

@@ -39,11 +39,15 @@ class PaOutcomeModel:
         powr = float(x.get("bat_power_z", 0.0) or 0.0)
         gb_bias = float(x.get("pit_gb_bias_z", 0.0) or 0.0)
         pl = float(x.get("bat_pull_z", 0.0) or 0.0)
+        risp = float(x.get("bat_risp_z", 0.0) or 0.0)  # already gated by context
 
         base[1] += 0.03 * pit  # K
         base[7] += 0.04 * powr + 0.01 * pl  # HR
         base[3] += 0.01 * gb_bias  # IP_OUT up if GB bias
         base[3] -= 0.02 * powr  # fewer outs with power
+        # Modest RISP effect: slightly lower K, slightly higher 1B when RISP and batter has high sc
+        base[1] -= 0.02 * risp  # reduce K a bit with RISP bonus
+        base[4] += 0.03 * risp  # increase 1B a bit with RISP bonus
         base = np.clip(base, 1e-4, None)
         base = base / base.sum()
         return {c: float(v) for c, v in zip(self._classes, base)}

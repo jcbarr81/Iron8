@@ -98,3 +98,5 @@ doc/_build/
 # Misc
 *.log
 *.tmp
+src/baseball_sim/serve/__pycache__/api.cpython-311.pyc
+src/baseball_sim/models/__pycache__/pa_model.cpython-311.pyc
