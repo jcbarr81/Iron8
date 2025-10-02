@@ -1,12 +1,12 @@
 """
-Fit per-class Platt calibrators on a synthetic validation set using
+Fit per-class Platt calibrators on a held-out set from the real PA table using
 the trained PA model's predicted probabilities. Writes artifacts/pa_calibrator.joblib.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List
+from typing import Dict, List
 import sys
 
 # Ensure 'src' is importable when running as a script
@@ -16,118 +16,134 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 import numpy as np
+import pandas as pd
 from joblib import dump
+from sklearn.metrics import log_loss
+from sklearn.model_selection import train_test_split
 
 from baseball_sim.models.pa_model import PaOutcomeModel, CLASSES
+from baseball_sim.features.ratings_adapter import batter_features, pitcher_features
+from baseball_sim.features.context_features import context_features
+from baseball_sim.utils.players import load_players_csv
 from baseball_sim.calibration.calibrators import MultiClassPlattCalibrator
 
 
-RNG = np.random.default_rng(24680)
+PA_TABLE = ROOT / "artifacts" / "pa_table.parquet"
+PLAYERS_CSV = ROOT / "data" / "players.csv"
+MODEL_PATH = ROOT / "artifacts" / "pa_model.joblib"
 
 
-def _softmax(z: np.ndarray) -> np.ndarray:
-    z = z - np.max(z, axis=1, keepdims=True)
-    ez = np.exp(z)
-    return ez / ez.sum(axis=1, keepdims=True)
+def _safe_int(val, default: int = 0) -> int:
+    try:
+        return int(val) if not pd.isna(val) else default
+    except Exception:
+        return default
 
 
-def _make_features(n: int) -> tuple[np.ndarray, List[str]]:
-    feats = {}
-    # Batter
-    feats["bat_contact_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["bat_power_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["bat_gbfb_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["bat_pull_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["bat_risp_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["bat_field_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["bat_arm_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["bat_isLHB"] = RNG.integers(0, 2, size=n).astype(float)
-    # Pitcher
-    feats["pit_stamina_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["pit_control_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["pit_move_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["pit_hold_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["pit_field_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["pit_arm_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["pit_stuff_z"] = RNG.normal(0.0, 1.0, size=n)
-    feats["pit_gb_bias_z"] = RNG.normal(0.0, 1.0, size=n)
-    # Context
-    feats["ctx_count_b"] = RNG.integers(0, 4, size=n).astype(float)
-    feats["ctx_count_s"] = RNG.integers(0, 3, size=n).astype(float)
-    feats["ctx_outs"] = RNG.integers(0, 3, size=n).astype(float)
-    feats["ctx_on_first"] = RNG.integers(0, 2, size=n).astype(float)
-    feats["ctx_on_second"] = RNG.integers(0, 2, size=n).astype(float)
-    feats["ctx_on_third"] = RNG.integers(0, 2, size=n).astype(float)
-    feats["ctx_is_risp"] = ((feats["ctx_on_second"] + feats["ctx_on_third"]) > 0).astype(float)
-    feats["ctx_tto"] = RNG.integers(1, 4, size=n).astype(float)
-
-    names = list(feats.keys())
-    X = np.column_stack([feats[k] for k in names]).astype(float)
-    return X, names
+def _safe_str(val, default: str = "") -> str:
+    try:
+        return str(val) if not pd.isna(val) else default
+    except Exception:
+        return default
 
 
-def _make_logits(X: np.ndarray, names: List[str]) -> np.ndarray:
-    n = X.shape[0]
-    base = np.array([0.0, 0.3, -1.5, 0.6, 0.2, -0.4, -1.0, -1.2], dtype=float)
-    Z = np.tile(base, (n, 1))
-    name_to_idx = {k: i for i, k in enumerate(names)}
+def _safe_base(val):
+    if pd.isna(val):
+        return None
+    return val
 
-    def v(k: str) -> np.ndarray:
-        return X[:, name_to_idx[k]]
 
-    Z[:, 1] += 0.9 * v("pit_stuff_z") + 0.4 * v("ctx_count_s")
-    Z[:, 0] += -0.8 * v("pit_control_z") + 0.5 * v("ctx_count_b")
-    Z[:, 7] += 0.9 * v("bat_power_z") + 0.3 * v("bat_pull_z")
-    Z[:, 3] += 0.6 * v("pit_gb_bias_z")
-    Z[:, 4] += 0.2 * v("bat_contact_z")
-    Z[:, 5] += 0.15 * v("bat_contact_z")
-    Z[:, 6] += 0.10 * v("bat_contact_z")
-    Z += RNG.normal(0.0, 0.25, size=Z.shape)
-    return Z
+def to_state_row(r: pd.Series) -> Dict:
+    inning = _safe_int(r.get("inning", 1), 1)
+    half = _safe_str(r.get("half", "T"), "T") or "T"
+    if half and half.lower().startswith("b"):
+        half = "B"
+    elif half and half.lower().startswith("t"):
+        half = "T"
+    else:
+        half = "T"
+    outs = _safe_int(r.get("outs", 0), 0)
+    balls = _safe_int(r.get("balls", 0), 0)
+    strikes = _safe_int(r.get("strikes", 0), 0)
+    park_id = r.get("park_id")
+    state = {
+        "inning": inning,
+        "half": half,
+        "outs": outs,
+        "bases": {
+            "1B": _safe_base(r.get("base_1B")),
+            "2B": _safe_base(r.get("base_2B")),
+            "3B": _safe_base(r.get("base_3B")),
+        },
+        "score": {"away": 0, "home": 0},
+        "count": {"balls": balls, "strikes": strikes},
+        "park_id": park_id if not pd.isna(park_id) else None,
+    }
+    return state
 
 
 def main():
-    model_path = ROOT / "artifacts" / "pa_model.joblib"
-    if not model_path.exists():
-        print(f"Model artifact not found: {model_path}. Run training first.")
-        return
+    if not MODEL_PATH.exists():
+        print(f"Model artifact not found: {MODEL_PATH}. Run training first.")
+        return 1
+    if not PA_TABLE.exists():
+        print(f"PA table not found: {PA_TABLE}. Build it first.")
+        return 1
 
     m = PaOutcomeModel()
-    m.load(str(model_path))
+    m.load(str(MODEL_PATH))
+    feature_order: List[str] = getattr(m, "_feature_names", [])
 
-    # Validation set
-    n = 20000
-    X, names = _make_features(n)
-    logits = _make_logits(X, names)
-    P_true = _softmax(logits)
-    y = np.array([RNG.choice(len(CLASSES), p=P_true[i]) for i in range(n)], dtype=int)
+    df = pd.read_parquet(PA_TABLE)
+    players = load_players_csv(str(PLAYERS_CSV)) if PLAYERS_CSV.exists() else {}
 
-    # Predicted (raw) probabilities from the trained model
-    if getattr(m, "_model", None) is not None and m._feature_names:
-        # Ensure columns align to model's expected feature order
-        idx_map = [names.index(f) for f in m._feature_names]
-        X_aligned = X[:, idx_map]
-        P_raw = m._model.predict_proba(X_aligned)
-    else:
-        # Fallback: slower path via per-row predict_proba
-        P_raw = np.zeros((n, len(CLASSES)), dtype=float)
-        for i in range(n):
-            feats = {k: float(X[i, j]) for j, k in enumerate(names)}
-            d = m.predict_proba(feats)
-            P_raw[i] = np.array([d[c] for c in CLASSES], dtype=float)
+    feat_rows: List[Dict[str, float]] = []
+    labels: List[int] = []
+    for _, r in df.iterrows():
+        batter = {"player_id": r.get("batter_id")}
+        pitcher = {"player_id": r.get("pitcher_id"), "throws": "R"}
+        if batter["player_id"] in players:
+            batter["ratings"] = players[batter["player_id"]]
+        if pitcher["player_id"] in players:
+            pr = players[pitcher["player_id"]]
+            if "arm" not in pr and "as" in pr:
+                pr = {**pr, "arm": pr.get("as")}
+                pr.pop("as", None)
+            else:
+                pr = {k: v for k, v in pr.items() if k != "as"}
+            pitcher["ratings"] = pr
 
-    # Fit Platt calibrators
+        b_feats = batter_features(batter)
+        p_feats = pitcher_features(pitcher)
+        c_feats = context_features(to_state_row(r), pitcher)
+        feats = {**b_feats, **p_feats, **c_feats}
+        feat_rows.append(feats)
+
+        cls = str(r.get("outcome_class")).upper()
+        try:
+            y_idx = CLASSES.index(cls)
+        except ValueError:
+            y_idx = CLASSES.index("IP_OUT")
+        labels.append(y_idx)
+
+    if not feature_order:
+        feature_order = sorted({k for row in feat_rows for k in row.keys()})
+    X = np.array([[float(row.get(k, 0.0) or 0.0) for k in feature_order] for row in feat_rows], dtype=float)
+    y = np.array(labels, dtype=int)
+
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    if getattr(m, "_model", None) is None:
+        print("Trained model is missing. Cannot calibrate.")
+        return 1
+
+    P_raw = m._model.predict_proba(X_val)
     calib = MultiClassPlattCalibrator(class_names=CLASSES)
-    calib.fit(y_true=y, y_pred_proba=P_raw, class_names=CLASSES)
+    calib.fit(y_true=y_val, y_pred_proba=P_raw, class_names=CLASSES)
 
-    # Save
-    out_dir = ROOT / "artifacts"
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / "pa_calibrator.joblib"
+    out_path = ROOT / "artifacts" / "pa_calibrator.joblib"
     dump(calib, out_path)
 
-    # Summary
-    # Vectorized apply: per-class calibration then row-normalize
+    # Evaluate
     P_cal = np.zeros_like(P_raw)
     for idx, cname in enumerate(CLASSES):
         mdl = calib.models.get(cname)
@@ -139,14 +155,17 @@ def main():
             P_cal[:, idx] = mdl.predict_proba(P_raw[:, idx].reshape(-1, 1))[:, pos_idx]
     P_cal = P_cal / P_cal.sum(axis=1, keepdims=True)
 
-    print("Calibration summary (mean raw -> mean cal | true rate):")
+    raw_ll = log_loss(y_val, P_raw, labels=list(range(len(CLASSES))))
+    cal_ll = log_loss(y_val, P_cal, labels=list(range(len(CLASSES))))
+    print(f"Log loss: raw={raw_ll:.4f} cal={cal_ll:.4f}")
+    print("Calibration summary (mean raw -> mean cal):")
     for idx, cname in enumerate(CLASSES):
         raw_mean = P_raw[:, idx].mean()
         cal_mean = P_cal[:, idx].mean()
-        true_rate = (y == idx).mean()
-        print(f"  {cname}: {raw_mean:.3f} -> {cal_mean:.3f} | true={true_rate:.3f}")
+        print(f"  {cname}: {raw_mean:.3f} -> {cal_mean:.3f}")
     print(f"Saved: {out_path}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

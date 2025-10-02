@@ -29,6 +29,9 @@ class Rules(BaseModel):
     dh: Optional[bool] = True
     shift_restrictions: Optional[bool] = True
     extras_runner_on_2nd: Optional[bool] = True
+    challenges_enabled: Optional[bool] = False
+    overturn_rate: Optional[float] = 0.2
+    three_batter_min: Optional[bool] = True
 
 class State(BaseModel):
     inning: int
@@ -48,6 +51,7 @@ class Ratings(BaseModel):
     gf: Optional[int] = None
     pl: Optional[int] = None
     sc: Optional[int] = None
+    sp: Optional[int] = None   # speed (baserunning/steals)
     fa: Optional[int] = None
     arm: Optional[int] = None
 
@@ -77,6 +81,8 @@ class Pitcher(BaseModel):
     throws: Literal["L", "R"]
     pitch_count: Optional[int] = None
     tto_index: Optional[int] = None
+    batters_faced_in_stint: Optional[int] = None
+    entered_cold: Optional[bool] = None
     ratings: Optional[Ratings] = None
 
 class SimRequest(BaseModel):
@@ -96,6 +102,151 @@ class SimResponse(BaseModel):
     model_version: str
     probs: Dict[str, float]
     sampled_event: str
-    bip_detail: Optional[Dict[str, float]] = None
+    bip_detail: Optional[Dict[str, object]] = None
     advancement: Optional[Dict[str, object]] = None
     rng: Optional[Dict[str, int]] = None
+    trace_id: Optional[str] = None
+    win_prob_home: Optional[float] = None
+    leverage_index: Optional[float] = None
+
+
+# Micro-events: Steal/PO/WP/PB
+class Runner(BaseModel):
+    player_id: Optional[str] = None
+    ratings: Optional[Ratings] = None
+
+
+class StealRequest(BaseModel):
+    state: State
+    runner_base: Literal["1B", "2B"]
+    runner: Runner
+    pitcher: Pitcher
+    defense: Optional[Dict[str, object]] = None
+    seed: Optional[int] = None
+
+
+class StealResponse(BaseModel):
+    event: Literal["SB", "CS", "PO", "WP", "PB"]
+    outs_recorded: int
+    bases_ending: Dict[str, Optional[str]]
+    rng: Optional[Dict[str, int]] = None
+
+
+# Pitch-by-pitch
+class PitchRequest(BaseModel):
+    game_id: str
+    state: State
+    batter: Batter
+    pitcher: Pitcher
+    defense: Optional[Dict[str, object]] = None
+    return_contact: bool = True
+    seed: Optional[int] = None
+    # Optional umpire profile and pitch location hint
+    umpire: Optional[Dict[str, float]] = None  # {"overall_bias": -1..1, "edge_bias": -1..1}
+    edge: Optional[bool] = False
+
+
+class PitchResponse(BaseModel):
+    pitch_type: str
+    result: Literal["ball", "called_strike", "swing_miss", "foul", "in_play", "hbp"]
+    next_count: Count
+    probs: Optional[Dict[str, float]] = None
+    pre_pitch: Optional[Literal["no_play", "PO"]] = None
+    pre_info: Optional[Dict[str, object]] = None
+    bip_detail: Optional[Dict[str, object]] = None
+    advancement: Optional[Dict[str, object]] = None
+    rng: Optional[Dict[str, int]] = None
+
+
+# Strategy advisories
+class PinchHitRequest(BaseModel):
+    state: State
+    current_batter: Batter
+    pitcher: Pitcher
+    candidates: list[Batter]
+
+
+class PinchHitResponse(BaseModel):
+    recommend: bool
+    best_candidate_id: Optional[str] = None
+    score_delta: float = 0.0
+
+
+class BullpenRequest(BaseModel):
+    state: State
+    upcoming_batter: Batter
+    pitcher_candidates: list[Pitcher]
+
+
+class BullpenResponse(BaseModel):
+    recommend: bool
+    best_pitcher_id: Optional[str] = None
+    rationale: Optional[str] = None
+
+
+class BuntRequest(BaseModel):
+    state: State
+    batter: Batter
+
+
+class BuntResponse(BaseModel):
+    recommend: bool
+    rationale: Optional[str] = None
+
+
+class IBBRequest(BaseModel):
+    state: State
+    batter: Batter
+
+
+class IBBResponse(BaseModel):
+    recommend: bool
+    rationale: Optional[str] = None
+
+
+# Game summaries and logs (stateless computation from provided logs)
+class GameEvent(BaseModel):
+    inning: int
+    half: Literal["T", "B"]
+    team: Literal["home", "away"]
+    rbi: int = 0
+    outs_recorded: int = 0
+    error: Optional[bool] = None
+
+
+class BoxscoreRequest(BaseModel):
+    game_id: str
+    home_team: str
+    away_team: str
+    log: list[GameEvent]
+
+
+class BoxscoreResponse(BaseModel):
+    game_id: str
+    runs: Dict[str, int]
+    earned_runs: Dict[str, int]
+    outs: int
+    winner: Optional[str] = None
+
+
+class GameLogRequest(BaseModel):
+    game_id: str
+    log: list[GameEvent]
+
+
+class GameLogResponse(BaseModel):
+    game_id: str
+    events: list[GameEvent]
+
+
+# Three-batter minimum rules check
+class ThreeBatterMinRequest(BaseModel):
+    three_batter_min: Optional[bool] = True
+    batters_faced_in_stint: int
+    inning_ended: bool = False
+    injury_exception: bool = False
+
+
+class ThreeBatterMinResponse(BaseModel):
+    allowed: bool
+    reason: Optional[str] = None

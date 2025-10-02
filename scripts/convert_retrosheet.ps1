@@ -24,33 +24,77 @@ $byYear = $evFiles | Group-Object { $_.BaseName.Substring(0,4) }
 $startDir = Get-Location
 foreach ($grp in $byYear) {
   $year = $grp.Name
-  # Find the common parent that contains TEAMYYYY (or bail)
-  $parents = $grp.Group | ForEach-Object { $_.Directory } | Select-Object -Unique
-  $yearDir = $null
-  foreach ($p in $parents) {
-    if (Test-Path (Join-Path $p.FullName "TEAM$year")) { $yearDir = $p.FullName; break }
+  # Choose an EV directory that contains the EVN/EVA files
+  $evDir = $null
+  $candidateDirs = $grp.Group | ForEach-Object { $_.Directory.FullName } | Select-Object -Unique
+  foreach ($dir in $candidateDirs) {
+    $evMatches = Get-ChildItem -Path $dir -Filter ("{0}*.EV?" -f $year) -File -ErrorAction SilentlyContinue
+    if ($null -ne $evMatches -and $evMatches.Count -gt 0) { $evDir = $dir; break }
   }
-  if (-not $yearDir) {
-    Write-Host "ERROR: TEAM$year not found in any parent dir of the $year EV files. Extract the Retrosheet ZIP so TEAM$year sits next to  ${year}*.EV? files." -ForegroundColor Red
+  if (-not $evDir) {
+    Write-Host "ERROR: No EVN/EVA files found for $year under expected directories." -ForegroundColor Red
     continue
+  }
+
+  # Locate TEAM$year (roster) anywhere under raw root; copy alongside EV files if needed
+  $teamFile = Get-ChildItem -Path $rawRoot -Filter ("TEAM{0}" -f $year) -File -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+  $copiedTeam = $false
+  if (-not $teamFile) {
+    Write-Host "ERROR: TEAM$year not found anywhere under $rawRoot. Extract Retrosheet rosters." -ForegroundColor Red
+    continue
+  }
+  $teamAtEv = Join-Path $evDir ("TEAM{0}" -f $year)
+  if (-not (Test-Path -LiteralPath $teamAtEv)) {
+    try {
+      Copy-Item -LiteralPath $teamFile.FullName -Destination $teamAtEv -Force
+      $copiedTeam = $true
+    } catch {
+      Write-Host ("ERROR: Failed to place TEAM{0} next to EVN/EVA in {1}: {2}" -f $year, $evDir, $_) -ForegroundColor Red
+      continue
+    }
   }
 
   # Build season output path
   $seasonOut = Join-Path $seasonOutDir ("retrosheet_events_{0}.csv" -f $year)
-  Write-Host "Converting $year from $yearDir -> $seasonOut" -ForegroundColor Cyan
+  Write-Host "Converting $year from $evDir -> $seasonOut" -ForegroundColor Cyan
 
-  # cd into the directory that has TEAMYYYY + EV? files
-  Set-Location $yearDir
+  # cd into the EV directory (TEAMYYYY is ensured to exist here now)
+  Set-Location $evDir
 
   # Run cwevent with relative names (so it sees TEAMYYYY)
   $pattern = "${year}*.EV?"
-  & $CwEvent -x -y $year -f 0-96 $pattern 2>$null | Out-File -Encoding UTF8 -FilePath $seasonOut
+  $matches = Get-ChildItem -Path . -Filter $pattern -File -ErrorAction SilentlyContinue
+  if ($null -eq $matches -or $matches.Count -eq 0) {
+    Write-Host "ERROR: No files matched pattern '$pattern' in $yearDir. Ensure EVN/EVA files are here." -ForegroundColor Red
+    Set-Location $startDir
+    continue
+  }
+  # Try multiple cwevent invocations for compatibility across builds
+  # Try 1: no-space -f (include field names with -n). Do NOT pass -x (requires a list).
+  & $CwEvent -n -y $year -f0-63 $pattern 2>$null | Out-File -Encoding UTF8 -FilePath $seasonOut
 
-  if ($LASTEXITCODE -ne 0 -or -not (Test-Path $seasonOut)) {
-    Write-Host "cwevent failed for $year. Verify cwevent works here: `"$CwEvent`" -V and that TEAM$year is present." -ForegroundColor Red
+  $ok = (Test-Path $seasonOut) -and ((Get-Item $seasonOut).Length -gt 0)
+  if (-not $ok) {
+    # Try 2: space -f
+    & $CwEvent -n -y $year -f 0-63 $pattern 2>$null | Out-File -Encoding UTF8 -FilePath $seasonOut
+    $ok = (Test-Path $seasonOut) -and ((Get-Item $seasonOut).Length -gt 0)
+  }
+  if (-not $ok) {
+    # Try 3: omit -f (default field list)
+    & $CwEvent -n -y $year $pattern 2>$null | Out-File -Encoding UTF8 -FilePath $seasonOut
+    $ok = (Test-Path $seasonOut) -and ((Get-Item $seasonOut).Length -gt 0)
+  }
+
+  if (-not $ok) {
+    Write-Host "cwevent failed for $year. Ensure TEAM$year and ${year}*.EV?/EVA are in the same folder. Manual test: cwevent -x -y $year ${year}*.EV? > out.csv" -ForegroundColor Red
+    # Clean up copied TEAM file if we created it
+    if ($copiedTeam -and (Test-Path -LiteralPath $teamAtEv)) { Remove-Item -LiteralPath $teamAtEv -Force }
     Set-Location $startDir
     exit 1
   }
+
+  # Clean up copied TEAM file to leave tree unchanged
+  if ($copiedTeam -and (Test-Path -LiteralPath $teamAtEv)) { Remove-Item -LiteralPath $teamAtEv -Force }
 }
 
 # Back to repo root

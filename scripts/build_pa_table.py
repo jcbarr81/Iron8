@@ -1,154 +1,159 @@
-import pandas as pd
-import numpy as np
+"""
+Build a Plate Appearance (PA) training table from Retrosheet events.
+
+Input: data/processed/retrosheet_events.csv
+Output: artifacts/pa_table.parquet (one row per PA)
+
+Columns in output:
+- game_date, park_id, inning, half (T/B)
+- batter_id, pitcher_id
+- balls, strikes, outs
+- base_1B, base_2B, base_3B (runner IDs or None)
+- outcome_class in {BB,K,HBP,IP_OUT,1B,2B,3B,HR}
+
+This script is resilient to schema differences; it attempts to detect
+likely input columns.
+"""
+
+from __future__ import annotations
+
 from pathlib import Path
+import sys
+import pandas as pd
 
-IN_PATH  = Path("data/processed/retrosheet_events.csv")
-OUT_PATH = Path("data/processed/pa_table.csv")
 
-# ---- helpers ------------------------------------------------------------
+# Resolve repo root so the script can be run from any working directory
+ROOT = Path(__file__).resolve().parents[1]
+IN_PATH = ROOT / "data" / "processed" / "retrosheet_events.csv"
+OUT_DIR = ROOT / "artifacts"
+OUT_PATH = OUT_DIR / "pa_table.parquet"
 
-EVENT_MAP = {
-    2: "BB",   # walk
-    3: "BB",   # intentional walk
-    4: "K",    # strikeout
-    14: "HBP", # hit by pitch
-    20: "1B",
-    21: "2B",
-    22: "3B",
-    23: "HR",
+
+CLASS_MAP_TEXT = {
+    "walk": "BB",
+    "intentional walk": "BB",
+    "strikeout": "K",
+    "hit by pitch": "HBP",
+    "single": "1B",
+    "double": "2B",
+    "triple": "3B",
+    "home run": "HR",
 }
 
-def read_events(path: Path) -> pd.DataFrame:
-    if not path.exists():
-        raise FileNotFoundError(f"Missing {path}. Did you run convert_retrosheet.ps1?")
-    return pd.read_csv(path, low_memory=False)
 
-def col(df: pd.DataFrame, *candidates: str) -> str | None:
-    lower = {c.lower(): c for c in df.columns}
-    for cand in candidates:
-        if cand.lower() in lower:
-            return lower[cand.lower()]
-    return None
+def to_half(row: pd.Series) -> str:
+    # Try common forms: 'top/bottom', 'T/B', batting team vs home/away
+    for k in ("inning_topbot", "half", "batting_team_half", "TOP_BOTTOM", "TB"):
+        if k in row and pd.notna(row[k]):
+            v = str(row[k]).strip().upper()
+            if v.startswith("T") or v.startswith("TOP"):
+                return "T"
+            if v.startswith("B") or v.startswith("BOT"):
+                return "B"
+    # Fallback; if batting team is home -> B else T
+    # cwevent default has BAT_HOME_ID: 1 when home is batting
+    for key in ("BAT_HOME_ID", "bat_home_id", "bat_home_fl"):
+        if key in row and pd.notna(row[key]):
+            try:
+                return "B" if int(row[key]) == 1 else "T"
+            except Exception:
+                pass
+    bt = str(row.get("batting_team", "")).lower()
+    if bt == "home":
+        return "B"
+    return "T"
 
-def normalize(df: pd.DataFrame) -> pd.DataFrame:
-    get = lambda *xs: col(df, *xs)
 
-    out = pd.DataFrame(index=df.index)
+def map_outcome(row: pd.Series) -> str:
+    # 1) Use explicit numeric codes if present
+    evcd = row.get("event_cd") if "event_cd" in row else row.get("EVENT_CD")
+    try:
+        if pd.notna(evcd):
+            evcd = int(evcd)
+            if evcd == 14:
+                return "BB"
+            if evcd == 3:
+                return "K"
+            if evcd == 16:
+                return "HBP"
+            if evcd in (20, 21, 22, 23):
+                return {20: "1B", 21: "2B", 22: "3B", 23: "HR"}[evcd]
+    except Exception:
+        pass
 
-    out["game_id"] = df[get("game_id")] if get("game_id") else pd.NA
-    out["date"]    = df[get("game_dt","date","start_date")] if get("game_dt","date","start_date") else pd.NA
-    out["inning"]  = pd.to_numeric(df[get("inn_ct","inning")] if get("inn_ct","inning") else np.nan, errors="coerce").astype("Int64")
+    # 2) hit value column
+    hv = row.get("hit_value") if "hit_value" in row else row.get("H_CD")
+    try:
+        if pd.notna(hv):
+            hv = int(hv)
+            if hv in (1, 2, 3, 4):
+                return {1: "1B", 2: "2B", 3: "3B", 4: "HR"}[hv]
+    except Exception:
+        pass
 
-    # half from bat_home_id (1=Bottom, 0=Top)
-    if get("bat_home_id"):
-        out["half"] = np.where(pd.to_numeric(df[get("bat_home_id")], errors="coerce")==1, "B", "T")
-    else:
-        out["half"] = "T"
+    # 3) textual event type
+    et = str(row.get("event_type", row.get("EVENT_TX", ""))).strip().lower()
+    if et:
+        for key, cls in CLASS_MAP_TEXT.items():
+            if key in et:
+                return cls
 
-    out["batter_retro_id"]  = df[get("bat_id","batter")] if get("bat_id","batter") else pd.NA
-    out["pitcher_retro_id"] = df[get("pit_id","pitcher")] if get("pit_id","pitcher") else pd.NA
+    # Default
+    return "IP_OUT"
 
-    out["outs_before"] = pd.to_numeric(df[get("outs_ct","outs_before")] if get("outs_ct","outs_before") else np.nan, errors="coerce").astype("Int64")
 
-    out["b1_start"] = df[get("base1_run_id","runner_on_1b","b1_start")] if get("base1_run_id","runner_on_1b","b1_start") else pd.NA
-    out["b2_start"] = df[get("base2_run_id","runner_on_2b","b2_start")] if get("base2_run_id","runner_on_2b","b2_start") else pd.NA
-    out["b3_start"] = df[get("base3_run_id","runner_on_3b","b3_start")] if get("base3_run_id","runner_on_3b","b3_start") else pd.NA
+def safe_get(obj, names: list[str], default=None):
+    """Return column/field from a DataFrame/Series by first matching name.
 
-    out["home_team"] = df[get("hometeam","home_team","home_team_id")] if get("hometeam","home_team","home_team_id") else pd.NA
-    out["away_team"] = df[get("visteam","away_team","away_team_id")] if get("visteam","away_team","away_team_id") else pd.NA
-    out["park_id"]   = df[get("park_id","park")] if get("park_id","park") else pd.NA
+    - If obj is a DataFrame: return the entire Series if the column exists.
+    - If obj is a Series (row): return the scalar value if present and not NA.
+    - Otherwise: default.
+    """
+    for n in names:
+        if isinstance(obj, pd.DataFrame):
+            if n in obj.columns:
+                return obj[n]
+        elif isinstance(obj, pd.Series):
+            if n in obj and not pd.isna(obj[n]):
+                return obj[n]
+    return default
 
-    # outcomes
-    out["event_cd"] = pd.to_numeric(df[get("event_cd")] if get("event_cd") else np.nan, errors="coerce").astype("Int64")
-    out["event_tx"] = df[get("event_tx","event")] if get("event_tx","event") else ""
 
-    # RBI per event/PA
-    out["rbi_ct"] = pd.to_numeric(df[get("rbi_ct","rbi","runs_batted_in")] if get("rbi_ct","rbi","runs_batted_in") else 0, errors="coerce").fillna(0).astype(int)
+def main() -> int:
+    if not IN_PATH.exists():
+        print(f"Input not found: {IN_PATH}")
+        print("Tip: Generate it via one of these paths:\n"
+              "  - PowerShell: scripts/convert_retrosheet.ps1 (requires 'cwevent' in PATH)\n"
+              "  - Python:     python scripts/ingest_retrosheet.py (reads data/raw/retrosheet/*.csv|.zip)")
+        return 1
+    df = pd.read_csv(IN_PATH)
 
-    # game-local ordering to build pa_id
-    # prefer a sequence if present; else use natural order within game
-    seq_col = get("bat_event_seq","event_num","seq")
-    if seq_col:
-        # ensure int order
-        out["_order"] = pd.to_numeric(df[seq_col], errors="coerce")
-    else:
-        out["_order"] = np.arange(len(df))
+    out = pd.DataFrame()
+    out["game_date"] = safe_get(df, ["game_date", "date", "DATE"], None)
+    out["park_id"] = safe_get(df, ["park_id", "home_park_id", "park", "PARK_ID"], None)
+    out["inning"] = safe_get(df, ["inning", "INN_CT"], 1)
+    out["half"] = df.apply(to_half, axis=1)
+    out["batter_id"] = safe_get(df, ["batter_id", "bat_id", "batter", "BAT_ID"], None)
+    out["pitcher_id"] = safe_get(df, ["pitcher_id", "pit_id", "pitcher", "PIT_ID"], None)
+    out["balls"] = safe_get(df, ["balls", "b", "BALLS_CT"], 0)
+    out["strikes"] = safe_get(df, ["strikes", "s", "STRIKES_CT"], 0)
+    out["outs"] = safe_get(df, ["outs", "o", "OUTS_CT"], 0)
+    out["base_1B"] = safe_get(df, ["base1_runner_id", "runner_on_1b", "on_1b", "BASE1_RUN_ID"], None)
+    out["base_2B"] = safe_get(df, ["base2_runner_id", "runner_on_2b", "on_2b", "BASE2_RUN_ID"], None)
+    out["base_3B"] = safe_get(df, ["base3_runner_id", "runner_on_3b", "on_3b", "BASE3_RUN_ID"], None)
+    out["outcome_class"] = df.apply(map_outcome, axis=1)
 
-    # stabilize types
-    for s in ["game_id","date","batter_retro_id","pitcher_retro_id","home_team","away_team","park_id","b1_start","b2_start","b3_start"]:
-        if s in out:
-            out[s] = out[s].astype("string")
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    try:
+        out.to_parquet(OUT_PATH, index=False)
+        print(f"Wrote {OUT_PATH} with {len(out)} rows")
+    except Exception as e:
+        # Fall back to CSV if parquet engine missing
+        alt = OUT_DIR / "pa_table.csv"
+        out.to_csv(alt, index=False)
+        print(f"Parquet write failed ({e}); wrote CSV fallback: {alt}")
+    return 0
 
-    return out
-
-def map_outcome(event_cd: pd.Series, event_tx: pd.Series) -> pd.Series:
-    # primary: numeric code
-    out = event_cd.map(EVENT_MAP)
-
-    # fallback: text contains keywords
-    tx = event_tx.fillna("").str.upper()
-    out = out.fillna(
-        np.where(tx.str.contains("HIT BY PITCH|HBP"), "HBP",
-        np.where(tx.str.contains("STRIKEOUT|STRUCK OUT|\\bK\\b"), "K",
-        np.where(tx.str.contains("INTENTIONAL|IBB|WALK"), "BB",
-        np.where(tx.str.contains("HOME RUN|HOMERUN|\\bHR\\b"), "HR",
-        np.where(tx.str.contains("\\bTRIPLE\\b|\\b3B\\b"), "3B",
-        np.where(tx.str.contains("\\bDOUBLE\\b|\\b2B\\b"), "2B",
-        np.where(tx.str.contains("\\bSINGLE\\b|\\b1B\\b"), "1B", None)))))))
-    )
-
-    return out.fillna("IP_OUT")
-
-def build_pa(df: pd.DataFrame) -> pd.DataFrame:
-    # PA rows = any row with a valid event_cd (most robust across years)
-    mask = df["event_cd"].notna()
-    pa = df.loc[mask].copy()
-
-    # per-game running index to make a unique pa_id (ordered)
-    pa = pa.sort_values(["game_id","_order"], kind="mergesort")
-    pa["pa_idx"] = pa.groupby("game_id").cumcount()
-    pa["pa_id"]  = pa["game_id"].fillna("UNK") + "-" + pa["pa_idx"].astype(str)
-
-    # map outcomes
-    pa["final_outcome_class"] = map_outcome(pa["event_cd"], pa["event_tx"])
-
-    # runs_scored for the PA
-    pa["runs_scored"] = pa["rbi_ct"]
-
-    # rename outs_before -> outs_start
-    pa["outs_start"] = pa["outs_before"]
-    keep = [
-        "pa_id","game_id","date","inning","half","outs_start",
-        "b1_start","b2_start","b3_start",
-        "batter_retro_id","pitcher_retro_id",
-        "home_team","away_team","park_id",
-        "final_outcome_class","runs_scored"
-    ]
-    for k in keep:
-        if k not in pa.columns:
-            pa[k] = pd.NA
-    pa = pa[keep]
-
-    # tidy types
-    pa["inning"] = pa["inning"].astype("Int64")
-    pa["outs_start"] = pa["outs_start"].astype("Int64")
-
-    return pa
-
-def main():
-    raw = read_events(IN_PATH)
-    df  = normalize(raw)
-    pa  = build_pa(df)
-
-    print(f"Plate appearances: {len(pa)}")
-    if len(pa):
-        dist = pa["final_outcome_class"].value_counts().sort_index()
-        for k, v in dist.items():
-            print(f"  {k:7s}: {v:>8d} ({v/len(pa):5.1%})")
-
-    OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    pa.to_csv(OUT_PATH, index=False)
-    print(f"Wrote: {OUT_PATH.resolve()}")
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

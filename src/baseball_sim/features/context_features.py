@@ -1,15 +1,18 @@
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 
-def context_features(state: Any, pitcher: Any) -> Dict[str, int]:
+def context_features(state: Any, pitcher: Any, batter: Optional[Any] = None) -> Dict[str, int]:
     """Return flat numeric features for the current PA.
 
     Keys: ctx_count_b, ctx_count_s, ctx_outs, ctx_on_first, ctx_on_second,
-    ctx_on_third, ctx_is_risp, ctx_tto.
+    ctx_on_third, ctx_is_risp, ctx_tto, ctx_matchup_is_platoon_adv,
+    ctx_shift_restrictions, ctx_temp_f, ctx_wind_mph, ctx_wind_dir_deg.
 
     - ctx_on_first/second/third are 0/1 based on Bases occupancy
     - ctx_is_risp is 1 if 2B or 3B is occupied
     - ctx_tto comes from pitcher.tto_index (default 1 if None)
+    - ctx_matchup_is_platoon_adv is 1 if batter handedness is opposite of
+      pitcher throws (e.g., L vs R), else 0
 
     Only uses stdlib and typing; no training/runtime libraries.
     """
@@ -60,6 +63,30 @@ def context_features(state: Any, pitcher: Any) -> Dict[str, int]:
     except Exception:
         tto_val = 1
 
+    # Platoon advantage: opposite-handed (L vs R or R vs L) -> 1, else 0
+    bats = _get(batter, "bats", None) if batter is not None else None
+    throws = _get(pitcher, "throws", None)
+    try:
+        bats_u = str(bats).upper() if bats is not None else None
+        throws_u = str(throws).upper() if throws is not None else None
+        platoon_adv = 1 if (bats_u in {"L","R"} and throws_u in {"L","R"} and bats_u != throws_u) else 0
+    except Exception:
+        platoon_adv = 0
+
+    # Rules: shift restrictions
+    rules = _get(state, "rules")
+    shift_restr = _get(rules, "shift_restrictions", True)
+    try:
+        shift_flag = 1 if bool(shift_restr) else 0
+    except Exception:
+        shift_flag = 1
+
+    # Weather
+    weather = _get(state, "weather")
+    temp_f = _get(weather, "temp_f", None)
+    wind_mph = _get(weather, "wind_mph", None)
+    wind_dir = _get(weather, "wind_dir_deg", None)
+
     return {
         "ctx_count_b": int(balls) if balls is not None else 0,
         "ctx_count_s": int(strikes) if strikes is not None else 0,
@@ -69,5 +96,9 @@ def context_features(state: Any, pitcher: Any) -> Dict[str, int]:
         "ctx_on_third": int(on_third),
         "ctx_is_risp": int(is_risp),
         "ctx_tto": int(tto_val),
+        "ctx_matchup_is_platoon_adv": int(platoon_adv),
+        "ctx_shift_restrictions": int(shift_flag),
+        "ctx_temp_f": float(temp_f) if temp_f is not None else 70.0,
+        "ctx_wind_mph": float(wind_mph) if wind_mph is not None else 0.0,
+        "ctx_wind_dir_deg": float(wind_dir) if wind_dir is not None else 0.0,
     }
-
