@@ -53,6 +53,7 @@ _advancer = BaserunningAdvancer()
 _micro = MicroEvents()
 _pitch_engine = PitchEngine()
 _onnx_runner = None
+_MODEL_AVAILABLE = False
 
 # Attempt to load trained model at server import; fall back silently if missing.
 try:
@@ -112,9 +113,32 @@ try:
 except Exception:
     _PARKS_CFG = {}
 
+# Strict mode: require model artifacts when requested
+_STRICT = bool(os.environ.get("STRICT_MODE") or os.environ.get("REQUIRE_MODEL_ARTIFACTS"))
+try:
+    _MODEL_AVAILABLE = (_onnx_runner is not None) or (getattr(_pa_model, "_model", None) is not None)
+    if _STRICT and not _MODEL_AVAILABLE:
+        raise RuntimeError("Model artifacts required but not loaded. Set STRICT_MODE=0 to allow fallback.")
+except Exception:
+    if _STRICT:
+        raise
+
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    try:
+        mv = getattr(_pa_model, "version", "")
+    except Exception:
+        mv = ""
+    return {
+        "status": "ok",
+        "model": {
+            "onnx": bool(_onnx_runner is not None),
+            "joblib": bool(getattr(_pa_model, "_model", None) is not None),
+            "strict": _STRICT,
+            "available": (_onnx_runner is not None) or (getattr(_pa_model, "_model", None) is not None),
+            "version": mv,
+        },
+    }
 
 @app.post("/v1/sim/plate-appearance", response_model=SimResponse)
 def plate_appearance(req: SimRequest):

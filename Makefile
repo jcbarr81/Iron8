@@ -1,6 +1,6 @@
 PY=python
 
-.PHONY: setup serve test train calibrate export-onnx fmt lint
+.PHONY: setup serve test train calibrate export-onnx verify-artifacts fmt lint
 
 setup:
 	$(PY) -m pip install -U pip
@@ -20,6 +20,9 @@ calibrate:
 
 export-onnx:
 	$(PY) scripts/export_onnx.py
+
+verify-artifacts:
+	$(PY) scripts/check_artifacts.py
 
 fmt:
 	$(PY) -m pip install ruff black
