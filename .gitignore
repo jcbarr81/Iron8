@@ -84,6 +84,8 @@ pythonenv*
 data/
 logs/
 tmp/
+!data/raw/seamheads_ballparks.csv
+!data/raw/park_dimensions.csv
 
 # Environment/local config files
 .env.local

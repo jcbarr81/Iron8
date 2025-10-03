@@ -1,0 +1,26 @@
+# Optional overrides for parks.yaml build
+# Copy to config/park_overrides.yaml and edit as needed.
+
+GEN:
+  roof: open
+  surface: grass
+  altitude_ft: 0
+
+# Example with Fenway Park (BOS05)
+BOS05:
+  roof: open
+  surface: grass
+  altitude_ft: 20
+  # Optional dimensions if you aren't using a dims CSV
+  # dims:
+  #   lf_line_ft: 310
+  #   lf_gap_ft: 379
+  #   cf_ft: 390
+  #   rf_gap_ft: 380
+  #   rf_line_ft: 302
+  # wall_heights_ft:
+  #   lf: 37.2
+  #   lf_gap: 17
+  #   cf: 17
+  #   rf_gap: 8
+  #   rf: 3

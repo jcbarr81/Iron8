@@ -1,7 +1,3977 @@
-# Example directional park hints (placeholder)
+ALB01:
+  name: Riverside Park
+  city: Albany
+  state: NY
+  year_from: 1880
+  year_to: 1882
+  altitude_ft: 14.0
+  roof: open
+  surface: grass
+ALT01:
+  name: Columbia Park
+  city: Altoona
+  state: PA
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 1129.0
+  roof: open
+  surface: grass
+ANA01:
+  name: Angel Stadium of Anaheim
+  city: Anaheim
+  state: CA
+  year_from: 1966
+  altitude_ft: 154.0
+  foul_territory_sqft: 21500.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 381.0
+    cf_ft: 400.0
+    rf_gap_ft: 365.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 5.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 5.0
+  lf_short_porches: true
+  rf_short_porches: true
+ARL01:
+  name: Arlington Stadium
+  city: Arlington
+  state: TX
+  year_from: 1972
+  year_to: 1993
+  altitude_ft: 552.0
+  foul_territory_sqft: 24900.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 380.0
+    cf_ft: 400.0
+    rf_gap_ft: 380.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 12.0
+    rf: 12.0
+  lf_short_porches: true
+  rf_short_porches: true
+ARL02:
+  name: Rangers Ballpark in Arlington
+  city: Arlington
+  state: TX
+  year_from: 1994
+  year_to: 2019
+  altitude_ft: 549.0
+  foul_territory_sqft: 19500.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 332.0
+    lf_gap_ft: 390.0
+    cf_ft: 400.0
+    rf_gap_ft: 381.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 14.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  rf_short_porches: true
+ARL03:
+  name: Globe Life Field in Arlington
+  city: Arlington
+  state: TX
+  year_from: 2020
+  altitude_ft: 549.0
+  foul_territory_sqft: 23100.0
+  roof: retractable
+  surface: turf
+  dims:
+    lf_line_ft: 329.0
+    lf_gap_ft: 372.0
+    cf_ft: 407.0
+    rf_gap_ft: 374.0
+    rf_line_ft: 326.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+ATL01:
+  name: Atlanta-Fulton County Stadium
+  city: Atlanta
+  state: GA
+  year_from: 1966
+  year_to: 1996
+  altitude_ft: 979.0
+  foul_territory_sqft: 35900.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 385.0
+    cf_ft: 402.0
+    rf_gap_ft: 385.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 10.0
+    cf: 10.0
+    rf: 10.0
+  lf_short_porches: true
+  rf_short_porches: true
+ATL02:
+  name: Turner Field
+  city: Atlanta
+  state: GA
+  year_from: 1997
+  year_to: 2016
+  altitude_ft: 939.0
+  foul_territory_sqft: 23100.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    lf_gap_ft: 380.0
+    cf_ft: 401.0
+    rf_gap_ft: 390.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  rf_short_porches: true
+ATL03:
+  name: Suntrust Park
+  city: Atlanta
+  state: GA
+  year_from: 2017
+  altitude_ft: 981.0
+  foul_territory_sqft: 22300.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    lf_gap_ft: 385.0
+    cf_ft: 400.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 6.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 16.0
+  rf_short_porches: true
+BAL01:
+  name: Madison Avenue Grounds
+  city: Baltimore
+  state: MD
+  year_from: 1871
+  year_to: 1871
+  altitude_ft: 167.0
+  roof: open
+  surface: grass
+BAL02:
+  name: Newington Park
+  city: Baltimore
+  state: MD
+  year_from: 1872
+  year_to: 1882
+  altitude_ft: 195.0
+  roof: open
+  surface: grass
+BAL03:
+  name: Oriole Park I
+  city: Baltimore
+  state: MD
+  year_from: 1883
+  year_to: 1889
+  altitude_ft: 164.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 310.0
+    cf_ft: 470.0
+    rf_line_ft: 310.0
+  lf_short_porches: true
+  rf_short_porches: true
+BAL04:
+  name: Belair Lot
+  city: Baltimore
+  state: MD
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 25.0
+  roof: open
+  surface: grass
+BAL05:
+  name: Monumental Park
+  city: Baltimore
+  state: MD
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 32.0
+  roof: open
+  surface: grass
+BAL06:
+  name: Oriole Park II
+  city: Baltimore
+  state: MD
+  year_from: 1890
+  year_to: 1891
+  altitude_ft: 194.0
+  roof: open
+  surface: grass
+BAL07:
+  name: Oriole Park III
+  city: Baltimore
+  state: MD
+  year_from: 1891
+  year_to: 1899
+  altitude_ft: 153.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 300.0
+    rf_line_ft: 350.0
+  wall_heights_ft:
+    lf: 16.0
+    cf: 16.0
+    rf: 16.0
+  lf_short_porches: true
+BAL09:
+  name: Oriole Park IV
+  city: Baltimore
+  state: MD
+  year_from: 1901
+  year_to: 1902
+  altitude_ft: 202.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 414.0
+    lf_gap_ft: 384.0
+    cf_ft: 405.0
+    rf_gap_ft: 480.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 10.0
+    lf_gap: 10.0
+    cf: 10.0
+    rf_gap: 10.0
+    rf: 10.0
+  rf_short_porches: true
+BAL10:
+  name: Terrapin Park
+  city: Baltimore
+  state: MD
+  year_from: 1914
+  year_to: 1915
+  altitude_ft: 203.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 300.0
+    lf_gap_ft: 422.0
+    cf_ft: 347.0
+    rf_gap_ft: 336.0
+    rf_line_ft: 310.0
+  wall_heights_ft:
+    lf: 25.0
+    cf: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+BAL11:
+  name: Memorial Stadium
+  city: Baltimore
+  state: MD
+  year_from: 1954
+  year_to: 1991
+  altitude_ft: 231.0
+  foul_territory_sqft: 29700.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 309.0
+    lf_gap_ft: 376.0
+    cf_ft: 405.0
+    rf_gap_ft: 376.0
+    rf_line_ft: 309.0
+  wall_heights_ft:
+    lf: 14.0
+    cf: 8.0
+    rf: 14.0
+  lf_short_porches: true
+  rf_short_porches: true
+BAL12:
+  name: Oriole Park at Camden Yards
+  city: Baltimore
+  state: MD
+  year_from: 1992
+  altitude_ft: 35.0
+  foul_territory_sqft: 23600.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 333.0
+    lf_gap_ft: 364.0
+    cf_ft: 400.0
+    rf_gap_ft: 373.0
+    rf_line_ft: 318.0
+  wall_heights_ft:
+    lf: 7.0
+    lf_gap: 7.0
+    cf: 7.0
+    rf_gap: 7.0
+    rf: 21.0
+  rf_short_porches: true
+BOS01:
+  name: South End Grounds I
+  city: Boston
+  state: MA
+  year_from: 1871
+  year_to: 1887
+  altitude_ft: 11.0
+  roof: open
+  surface: grass
+BOS02:
+  name: Dartmouth Grounds
+  city: Boston
+  state: MA
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 66.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 274.0
+    lf_gap_ft: 365.0
+    cf_ft: 325.0
+    rf_gap_ft: 295.0
+    rf_line_ft: 274.0
+  lf_short_porches: true
+  rf_short_porches: true
+BOS03:
+  name: South End Grounds II
+  city: Boston
+  state: MA
+  year_from: 1888
+  year_to: 1894
+  altitude_ft: 11.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 250.0
+    lf_gap_ft: 430.0
+    cf_ft: 415.0
+    rf_gap_ft: 392.0
+    rf_line_ft: 255.0
+  wall_heights_ft:
+    rf_gap: 40.0
+    rf: 40.0
+  lf_short_porches: true
+  rf_short_porches: true
+BOS04:
+  name: Congress Street Grounds
+  city: Boston
+  state: MA
+  year_from: 1890
+  year_to: 1894
+  altitude_ft: 9.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 250.0
+  lf_short_porches: true
+BOS05:
+  name: South End Grounds III
+  city: Boston
+  state: MA
+  year_from: 1894
+  year_to: 1914
+  altitude_ft: 11.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 275.0
+    lf_gap_ft: 435.0
+    cf_ft: 386.0
+    rf_gap_ft: 440.0
+    rf_line_ft: 235.0
+  wall_heights_ft:
+    lf: 6.0
+    lf_gap: 20.0
+    cf: 6.0
+    rf_gap: 10.0
+    rf: 20.0
+  lf_short_porches: true
+  rf_short_porches: true
+BOS06:
+  name: Huntington Avenue Baseball Grounds
+  city: Boston
+  state: MA
+  year_from: 1901
+  year_to: 1911
+  altitude_ft: 8.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 305.0
+    lf_gap_ft: 402.0
+    cf_ft: 456.0
+    rf_gap_ft: 412.0
+    rf_line_ft: 320.0
+  wall_heights_ft:
+    lf: 3.0
+    lf_gap: 14.0
+    cf: 14.0
+    rf_gap: 28.0
+    rf: 14.0
+  lf_short_porches: true
+  rf_short_porches: true
+BOS07:
+  name: Fenway Park
+  city: Boston
+  state: MA
+  year_from: 1912
+  altitude_ft: 16.0
+  foul_territory_sqft: 18100.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 310.0
+    lf_gap_ft: 335.0
+    cf_ft: 390.0
+    rf_gap_ft: 380.0
+    rf_line_ft: 302.0
+  wall_heights_ft:
+    lf: 37.0
+    lf_gap: 18.0
+    cf: 9.0
+    rf_gap: 5.0
+    rf: 3.0
+  lf_short_porches: true
+  rf_short_porches: true
+BOS08:
+  name: Braves Field
+  city: Boston
+  state: MA
+  year_from: 1915
+  year_to: 1952
+  altitude_ft: 26.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 337.0
+    lf_gap_ft: 355.0
+    cf_ft: 370.0
+    rf_gap_ft: 355.0
+    rf_line_ft: 317.0
+  wall_heights_ft:
+    lf: 19.0
+    cf: 10.0
+    rf: 10.0
+  rf_short_porches: true
+BUF01:
+  name: Riverside Grounds
+  city: Buffalo
+  state: NY
+  year_from: 1879
+  year_to: 1883
+  altitude_ft: 631.0
+  roof: open
+  surface: grass
+BUF02:
+  name: Olympic Park I
+  city: Buffalo
+  state: NY
+  year_from: 1884
+  year_to: 1885
+  altitude_ft: 632.0
+  roof: open
+  surface: grass
+BUF03:
+  name: Olympic Park II
+  city: Buffalo
+  state: NY
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 630.0
+  roof: open
+  surface: grass
+BUF04:
+  name: International Fair Association Grounds
+  city: Buffalo
+  state: NY
+  year_from: 1914
+  year_to: 1915
+  altitude_ft: 630.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 308.0
+    lf_gap_ft: 352.0
+    cf_ft: 364.0
+    rf_gap_ft: 308.0
+    rf_line_ft: 290.0
+  lf_short_porches: true
+  rf_short_porches: true
+BUF05:
+  name: Sahlen Field
+  city: Buffalo
+  state: NY
+  year_from: 2020
+  altitude_ft: 630.0
+  foul_territory_sqft: 22800.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 371.0
+    cf_ft: 404.0
+    rf_gap_ft: 367.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 12.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+CAN01:
+  name: Mahaffey Park
+  city: Canton
+  state: OH
+  year_from: 1890
+  year_to: 1903
+  altitude_ft: 1058.0
+  roof: open
+  surface: grass
+CAN02:
+  name: Pastime Park
+  city: Canton
+  state: OH
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 1058.0
+CHI01:
+  name: Lake Front Park I
+  city: Chicago
+  state: IL
+  year_from: 1871
+  year_to: 1871
+  altitude_ft: 585.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 375.0
+    rf_line_ft: 375.0
+  wall_heights_ft:
+    lf: 6.0
+    cf: 6.0
+    rf: 6.0
+CHI02:
+  name: 23rd Street Park
+  city: Chicago
+  state: IL
+  year_from: 1872
+  year_to: 1877
+  altitude_ft: 599.0
+  roof: open
+  surface: grass
+CHI03:
+  name: Lake Front Park II
+  city: Chicago
+  state: IL
+  year_from: 1878
+  year_to: 1882
+  altitude_ft: 585.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 186.0
+    lf_gap_ft: 280.0
+    cf_ft: 300.0
+    rf_gap_ft: 252.0
+    rf_line_ft: 196.0
+  wall_heights_ft:
+    lf: 6.0
+    cf: 6.0
+    rf: 38.0
+  lf_short_porches: true
+  rf_short_porches: true
+CHI04:
+  name: Lake Front Park III
+  city: Chicago
+  state: IL
+  year_from: 1883
+  year_to: 1884
+  dims:
+    lf_line_ft: 186.0
+    lf_gap_ft: 280.0
+    cf_ft: 300.0
+    rf_gap_ft: 252.0
+    rf_line_ft: 196.0
+  wall_heights_ft:
+    lf: 6.0
+    cf: 6.0
+    rf: 38.0
+  lf_short_porches: true
+  rf_short_porches: true
+CHI05:
+  name: South Side Park I
+  city: Chicago
+  state: IL
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 599.0
+  roof: open
+  surface: grass
+CHI06:
+  name: West Side Park
+  city: Chicago
+  state: IL
+  year_from: 1885
+  year_to: 1891
+  altitude_ft: 588.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 216.0
+    rf_line_ft: 216.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 12.0
+    rf: 12.0
+  lf_short_porches: true
+  rf_short_porches: true
+CHI07:
+  name: South Side Park II
+  city: Chicago
+  state: IL
+  year_from: 1890
+  year_to: 1893
+  altitude_ft: 595.0
+  roof: open
+  surface: grass
+CHI08:
+  name: West Side Grounds
+  city: Chicago
+  state: IL
+  year_from: 1893
+  year_to: 1915
+  altitude_ft: 593.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 332.0
+    lf_gap_ft: 445.0
+    cf_ft: 450.0
+    rf_gap_ft: 383.0
+    rf_line_ft: 332.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 40.0
+    rf_gap: 8.0
+    rf: 8.0
+CHI09:
+  name: South Side Park III
+  city: Chicago
+  state: IL
+  year_from: 1901
+  year_to: 1910
+  altitude_ft: 594.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 397.0
+    cf_ft: 405.0
+    rf_gap_ft: 360.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 6.0
+    lf_gap: 6.0
+    cf: 6.0
+    rf_gap: 20.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+CHI10:
+  name: Comiskey Park I
+  city: Chicago
+  state: IL
+  year_from: 1910
+  year_to: 1990
+  altitude_ft: 594.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 347.0
+    lf_gap_ft: 382.0
+    cf_ft: 409.0
+    rf_gap_ft: 382.0
+    rf_line_ft: 347.0
+  wall_heights_ft:
+    lf: 10.0
+    cf: 11.0
+    rf: 10.0
+CHI11:
+  name: Wrigley Field
+  city: Chicago
+  state: IL
+  year_from: 1914
+  altitude_ft: 599.0
+  foul_territory_sqft: 16500.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 355.0
+    lf_gap_ft: 363.0
+    cf_ft: 400.0
+    rf_gap_ft: 381.0
+    rf_line_ft: 353.0
+  wall_heights_ft:
+    lf: 16.0
+    lf_gap: 11.0
+    cf: 11.0
+    rf_gap: 11.0
+    rf: 16.0
+CHI12:
+  name: Guaranteed Rate Field;U.S. Cellular Field
+  city: Chicago
+  state: IL
+  year_from: 1991
+  altitude_ft: 594.0
+  foul_territory_sqft: 25000.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 372.0
+    cf_ft: 400.0
+    rf_gap_ft: 372.0
+    rf_line_ft: 335.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+CIN01:
+  name: Lincoln Park Grounds
+  city: Cincinnati
+  state: OH
+  year_from: 1871
+  year_to: 1871
+  altitude_ft: 513.0
+  roof: open
+  surface: grass
+CIN02:
+  name: Avenue Grounds
+  city: Cincinnati
+  state: OH
+  year_from: 1876
+  year_to: 1879
+  altitude_ft: 480.0
+  roof: open
+  surface: grass
+CIN03:
+  name: Bank Street Grounds
+  city: Cincinnati
+  state: OH
+  year_from: 1880
+  year_to: 1884
+  altitude_ft: 496.0
+  roof: open
+  surface: grass
+CIN04:
+  name: League Park I
+  city: Cincinnati
+  state: OH
+  year_from: 1884
+  year_to: 1893
+  altitude_ft: 488.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 375.0
+    lf_gap_ft: 371.0
+    cf_ft: 413.0
+    rf_gap_ft: 380.0
+    rf_line_ft: 285.0
+  rf_short_porches: true
+CIN05:
+  name: League Park II
+  city: Cincinnati
+  state: OH
+  year_from: 1894
+  year_to: 1901
+  altitude_ft: 489.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 387.0
+    lf_gap_ft: 378.0
+    cf_ft: 414.0
+    rf_gap_ft: 445.0
+    rf_line_ft: 340.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 3.0
+    rf_gap: 4.0
+    rf: 3.0
+CIN06:
+  name: Palace of the Fans
+  city: Cincinnati
+  state: OH
+  year_from: 1902
+  year_to: 1911
+  altitude_ft: 489.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 360.0
+    lf_gap_ft: 418.0
+    cf_ft: 400.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 450.0
+  wall_heights_ft:
+    lf: 10.0
+    lf_gap: 20.0
+    cf: 20.0
+    rf_gap: 20.0
+    rf: 4.0
+CIN07:
+  name: Crosley Field
+  city: Cincinnati
+  state: OH
+  year_from: 1912
+  year_to: 1970
+  altitude_ft: 488.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 328.0
+    lf_gap_ft: 380.0
+    cf_ft: 387.0
+    rf_gap_ft: 383.0
+    rf_line_ft: 366.0
+  wall_heights_ft:
+    lf: 18.0
+    cf: 23.0
+    rf: 9.0
+  lf_short_porches: true
+CIN08:
+  name: Cinergy Field
+  city: Cincinnati
+  state: OH
+  year_from: 1970
+  year_to: 2002
+  altitude_ft: 489.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 370.0
+    cf_ft: 393.0
+    rf_gap_ft: 373.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 14.0
+    cf: 40.0
+    rf: 14.0
+  lf_short_porches: true
+  rf_short_porches: true
+CIN09:
+  name: Great American Ballpark
+  city: Cincinnati
+  state: OH
+  year_from: 2003
+  altitude_ft: 489.0
+  foul_territory_sqft: 23600.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 328.0
+    lf_gap_ft: 366.0
+    cf_ft: 404.0
+    rf_gap_ft: 366.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 12.0
+    lf_gap: 12.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+CLE01:
+  name: National Association Grounds
+  city: Cleveland
+  state: OH
+  year_from: 1871
+  year_to: 1872
+  altitude_ft: 674.0
+  roof: open
+  surface: grass
+CLE02:
+  name: League Park I
+  city: Cleveland
+  state: OH
+  year_from: 1879
+  year_to: 1884
+  altitude_ft: 667.0
+  roof: open
+  surface: grass
+CLE03:
+  name: League Park II
+  city: Cleveland
+  state: OH
+  year_from: 1887
+  year_to: 1890
+  altitude_ft: 660.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 410.0
+    cf_ft: 420.0
+    rf_line_ft: 419.0
+CLE04:
+  name: Brotherhood Park
+  city: Cleveland
+  state: OH
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 651.0
+  roof: open
+  surface: grass
+CLE05:
+  name: League Park III
+  city: Cleveland
+  state: OH
+  year_from: 1891
+  year_to: 1909
+  altitude_ft: 644.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 400.0
+    lf_gap_ft: 433.0
+    cf_ft: 455.0
+    rf_gap_ft: 348.0
+    rf_line_ft: 290.0
+  wall_heights_ft:
+    lf: 10.0
+    lf_gap: 10.0
+    cf: 20.0
+    rf_gap: 20.0
+    rf: 20.0
+  rf_short_porches: true
+CLE06:
+  name: League Park IV
+  city: Cleveland
+  state: OH
+  year_from: 1910
+  year_to: 1946
+  altitude_ft: 644.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 375.0
+    lf_gap_ft: 415.0
+    cf_ft: 420.0
+    rf_gap_ft: 400.0
+    rf_line_ft: 290.0
+  wall_heights_ft:
+    lf: 5.0
+    cf: 10.0
+    rf: 40.0
+  rf_short_porches: true
+CLE07:
+  name: Cleveland Stadium
+  city: Cleveland
+  state: OH
+  year_from: 1932
+  year_to: 1993
+  altitude_ft: 593.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 320.0
+    lf_gap_ft: 377.0
+    cf_ft: 400.0
+    rf_gap_ft: 385.0
+    rf_line_ft: 320.0
+  wall_heights_ft:
+    lf: 8.0
+    cf: 9.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+CLE08:
+  name: Progressive Field
+  city: Cleveland
+  state: OH
+  year_from: 1994
+  altitude_ft: 673.0
+  foul_territory_sqft: 21900.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 360.0
+    cf_ft: 405.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 19.0
+    lf_gap: 19.0
+    cf: 9.0
+    rf_gap: 9.0
+    rf: 14.0
+  lf_short_porches: true
+  rf_short_porches: true
+CLE09:
+  name: Cedar Avenue Driving Park
+  city: Cleveland
+  state: OH
+  year_from: 1887
+  year_to: 1887
+  altitude_ft: 673.0
+  roof: open
+  surface: grass
+CLL01:
+  name: Euclid Beach Park
+  city: Collinwood
+  state: OH
+  year_from: 1898
+  year_to: 1898
+  altitude_ft: 604.0
+  roof: open
+  surface: grass
+COL01:
+  name: Recreation Park I
+  city: Columbus
+  state: OH
+  year_from: 1883
+  year_to: 1884
+  altitude_ft: 788.0
+  roof: open
+  surface: grass
+COL02:
+  name: Recreation Park II
+  city: Columbus
+  state: OH
+  year_from: 1889
+  year_to: 1891
+  altitude_ft: 758.0
+  roof: open
+  surface: grass
+  dims:
+    rf_line_ft: 400.0
+COL03:
+  name: Neil Park I
+  city: Columbus
+  state: OH
+  year_from: 1902
+  year_to: 1903
+  altitude_ft: 783.0
+  roof: open
+  surface: grass
+  dims:
+    rf_line_ft: 240.0
+  rf_short_porches: true
+COL04:
+  name: Neil Park II
+  city: Columbus
+  state: OH
+  year_from: 1905
+  year_to: 1905
+  altitude_ft: 783.0
+  roof: open
+  surface: grass
+COV01:
+  name: Star Baseball Park
+  city: Covington
+  state: KY
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 509.0
+  roof: open
+  surface: grass
+DAY01:
+  name: Fairview Park
+  city: Dayton
+  state: OH
+  year_from: 1902
+  year_to: 1902
+  altitude_ft: 824.0
+  roof: open
+  surface: grass
+DEN01:
+  name: Mile High Stadium
+  city: Denver
+  state: CO
+  year_from: 1993
+  year_to: 1994
+  altitude_ft: 5211.0
+  foul_territory_sqft: 37900.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    lf_gap_ft: 366.0
+    cf_ft: 423.0
+    rf_gap_ft: 400.0
+    rf_line_ft: 370.0
+  wall_heights_ft:
+    lf: 14.0
+    cf: 14.0
+    rf: 18.0
+DEN02:
+  name: Coors Field
+  city: Denver
+  state: CO
+  year_from: 1995
+  altitude_ft: 5197.0
+  foul_territory_sqft: 24900.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 347.0
+    lf_gap_ft: 390.0
+    cf_ft: 415.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 350.0
+  wall_heights_ft:
+    lf: 13.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 16.5
+    rf: 16.5
+DET01:
+  name: Recreation Park
+  city: Detroit
+  state: MI
+  year_from: 1881
+  year_to: 1888
+  altitude_ft: 625.0
+  roof: open
+  surface: grass
+DET02:
+  name: Bennett Park
+  city: Detroit
+  state: MI
+  year_from: 1901
+  year_to: 1911
+  altitude_ft: 601.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 295.0
+    lf_gap_ft: 420.0
+    cf_ft: 490.0
+    rf_gap_ft: 386.0
+    rf_line_ft: 440.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 6.0
+    cf: 16.0
+    rf_gap: 12.0
+    rf: 6.0
+  lf_short_porches: true
+DET03:
+  name: Burns Park
+  city: Detroit
+  state: MI
+  year_from: 1901
+  year_to: 1902
+  altitude_ft: 590.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 295.0
+    lf_gap_ft: 340.0
+    cf_ft: 390.0
+    rf_gap_ft: 392.0
+    rf_line_ft: 340.0
+  lf_short_porches: true
+DET04:
+  name: Tiger Stadium
+  city: Detroit
+  state: MI
+  year_from: 1912
+  year_to: 1999
+  altitude_ft: 601.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 340.0
+    lf_gap_ft: 392.0
+    cf_ft: 425.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 9.0
+    cf: 9.0
+    rf: 9.0
+  rf_short_porches: true
+DET05:
+  name: Comerica Park
+  city: Detroit
+  state: MI
+  year_from: 2000
+  altitude_ft: 602.0
+  foul_territory_sqft: 26500.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 345.0
+    lf_gap_ft: 370.0
+    cf_ft: 420.0
+    rf_gap_ft: 356.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 6.0
+    lf_gap: 8.5
+    cf: 8.0
+    rf_gap: 14.0
+    rf: 8.0
+  rf_short_porches: true
+DOV01:
+  name: Fairview Park Fair Grounds
+  city: Dover
+  state: DE
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 40.0
+  roof: open
+  surface: grass
+DUN01:
+  name: TD Ballpark
+  city: Dunedin
+  state: FL
+  year_from: 2021
+  year_to: 2021
+  altitude_ft: 30.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 333.0
+    lf_gap_ft: 380.0
+    cf_ft: 400.0
+    rf_gap_ft: 363.0
+    rf_line_ft: 336.0
+DYE01:
+  name: Field of Dreams
+  city: Dyersville
+  state: IA
+  year_from: 2021
+  altitude_ft: 951.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    lf_gap_ft: 380.0
+    cf_ft: 400.0
+    rf_gap_ft: 380.0
+    rf_line_ft: 335.0
+  wall_heights_ft:
+    lf: 12.0
+    lf_gap: 12.0
+    cf: 12.0
+    rf_gap: 12.0
+    rf: 12.0
+ELM01:
+  name: Maple Avenue Driving Park
+  city: Elmira
+  state: NY
+  year_from: 1885
+  year_to: 1885
+  altitude_ft: 852.0
+  roof: open
+  surface: grass
+FOR01:
+  name: Grand Duchess
+  city: Fort Wayne
+  state: IN
+  year_from: 1871
+  year_to: 1871
+  altitude_ft: 759.0
+  roof: open
+  surface: grass
+FOR02:
+  name: Swinney Park
+  city: Fort Wayne
+  state: IN
+  year_from: 1882
+  year_to: 1882
+FOR03:
+  name: Jailhouse Flats
+  city: Fort Wayne
+  state: IN
+  year_from: 1902
+  year_to: 1902
+  altitude_ft: 756.0
+  roof: open
+  surface: grass
+FTB01:
+  name: Fort Bragg Field
+  city: Fort Bragg
+  state: NC
+  year_from: 2016
+  year_to: 2016
+  altitude_ft: 324.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 331.0
+    lf_gap_ft: 387.0
+    cf_ft: 405.0
+    rf_gap_ft: 387.0
+    rf_line_ft: 331.0
+GEA01:
+  name: Geauga Lake Grounds
+  city: Geauga Lake
+  state: OH
+  year_from: 1888
+  year_to: 1888
+  altitude_ft: 1030.0
+  roof: open
+  surface: grass
 GEN:
   rf_short_porches: false
   lf_short_porches: false
-BOS05:
+  roof: open
+  surface: grass
+  altitude_ft: 0
+GLO01:
+  name: Gloucester Point Grounds
+  city: Gloucester City
+  state: NJ
+  year_from: 1888
+  year_to: 1890
+  altitude_ft: 19.0
+  roof: open
+  surface: grass
+GLO02:
+  name: Gloucester Fireworks Park
+  city: Gloucester City
+  state: NJ
+  year_from: 1888
+  year_to: 1888
+  altitude_ft: 19.0
+  roof: open
+  surface: grass
+GRA01:
+  name: Ramona Park
+  city: Grand Rapids
+  state: MI
+  year_from: 1903
+  year_to: 1903
+  altitude_ft: 751.0
+  roof: open
+  surface: grass
+HAR01:
+  name: Harrison Field
+  city: Harrison
+  state: NJ
+  year_from: 1915
+  year_to: 1915
+  altitude_ft: 9.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 389.0
+    lf_gap_ft: 389.0
+    cf_ft: 380.0
+    rf_gap_ft: 424.0
+    rf_line_ft: 356.0
+HON01:
+  name: Aloha Stadium
+  city: Honolulu
+  state: HI
+  year_from: 1997
+  year_to: 1997
+  altitude_ft: 34.0
+  foul_territory_sqft: 42100.0
+  roof: open
+  surface: turf
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 375.0
+    cf_ft: 420.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
   rf_short_porches: true
-  lf_short_porches: false
+HOU01:
+  name: Colt Stadium
+  city: Houston
+  state: TX
+  year_from: 1962
+  year_to: 1964
+  altitude_ft: 55.0
+  foul_territory_sqft: 31700.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 400.0
+    lf_gap_ft: 395.0
+    cf_ft: 450.0
+    rf_gap_ft: 395.0
+    rf_line_ft: 400.0
+  wall_heights_ft:
+    lf: 8.0
+    cf: 30.0
+    rf: 8.0
+HOU02:
+  name: Astrodome
+  city: Houston
+  state: TX
+  year_from: 1965
+  year_to: 1999
+  altitude_ft: 52.0
+  foul_territory_sqft: 26900.0
+  roof: dome
+  surface: turf
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 375.0
+    cf_ft: 400.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 10.0
+    cf: 10.0
+    rf: 10.0
+  lf_short_porches: true
+  rf_short_porches: true
+HOU03:
+  name: Minute Maid Park
+  city: Houston
+  state: TX
+  year_from: 2000
+  altitude_ft: 20.0
+  foul_territory_sqft: 21000.0
+  roof: retractable
+  surface: grass
+  dims:
+    lf_line_ft: 315.0
+    lf_gap_ft: 362.0
+    cf_ft: 409.0
+    rf_gap_ft: 373.0
+    rf_line_ft: 326.0
+  wall_heights_ft:
+    lf: 21.0
+    lf_gap: 25.0
+    cf: 9.0
+    rf_gap: 9.0
+    rf: 7.0
+  lf_short_porches: true
+  rf_short_porches: true
+HRT01:
+  name: Hartford Ball Club Grounds
+  city: Hartford
+  state: CT
+  year_from: 1874
+  year_to: 1876
+  altitude_ft: 30.0
+  roof: open
+  surface: grass
+HRT02:
+  name: Hartford Trotting Park
+  city: Hartford
+  state: CT
+  year_from: 1872
+  year_to: 1872
+  altitude_ft: 59.0
+  roof: open
+  surface: grass
+IND01:
+  name: South Street Park
+  city: Indianapolis
+  state: IN
+  year_from: 1878
+  year_to: 1878
+  altitude_ft: 714.0
+  roof: open
+  surface: grass
+IND02:
+  name: Seventh Street Park I
+  city: Indianapolis
+  state: IN
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 715.0
+  roof: open
+  surface: grass
+IND03:
+  name: Bruce Grounds
+  city: Indianapolis
+  state: IN
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 725.0
+  roof: open
+  surface: grass
+IND04:
+  name: Seventh Street Park II
+  city: Indianapolis
+  state: IN
+  year_from: 1887
+  year_to: 1887
+  altitude_ft: 715.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 286.0
+    rf_line_ft: 261.0
+  lf_short_porches: true
+  rf_short_porches: true
+IND05:
+  name: Seventh Street Park III
+  city: Indianapolis
+  state: IN
+  year_from: 1888
+  year_to: 1889
+  altitude_ft: 715.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 286.0
+    rf_line_ft: 261.0
+  lf_short_porches: true
+  rf_short_porches: true
+IND06:
+  name: Indianapolis Park
+  city: Indianapolis
+  state: IN
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 742.0
+  roof: open
+  surface: grass
+IND07:
+  name: Federal League Park
+  city: Indianapolis
+  state: IN
+  year_from: 1914
+  year_to: 1914
+  altitude_ft: 697.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 365.0
+    lf_gap_ft: 421.0
+    cf_ft: 428.0
+    rf_gap_ft: 351.0
+    rf_line_ft: 304.0
+  rf_short_porches: true
+IRO01:
+  name: Windsor Beach
+  city: Irondequoit
+  state: NY
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 277.0
+  roof: open
+  surface: grass
+JER01:
+  name: Oakdale Park
+  city: Jersey City
+  state: NJ
+  year_from: 1889
+  year_to: 1889
+  altitude_ft: 94.0
+  roof: open
+  surface: grass
+JER02:
+  name: Roosevelt Stadium
+  city: Jersey City
+  state: NJ
+  year_from: 1956
+  year_to: 1957
+  altitude_ft: 10.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 397.0
+    cf_ft: 411.0
+    rf_gap_ft: 397.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 4.0
+    cf: 4.0
+    rf: 7.0
+  lf_short_porches: true
+  rf_short_porches: true
+KAN01:
+  name: Athletic Park
+  city: Kansas City
+  state: MO
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 777.0
+  roof: open
+  surface: grass
+KAN02:
+  name: Association Park
+  city: Kansas City
+  state: MO
+  year_from: 1886
+  year_to: 1892
+  altitude_ft: 907.0
+  roof: open
+  surface: grass
+KAN03:
+  name: Exposition Park
+  city: Kansas City
+  state: MO
+  year_from: 1889
+  year_to: 1889
+  altitude_ft: 890.0
+  roof: open
+  surface: grass
+KAN04:
+  name: Gordon and Koppel Field
+  city: Kansas City
+  state: MO
+  year_from: 1914
+  year_to: 1915
+  altitude_ft: 805.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 280.0
+    lf_gap_ft: 380.0
+    cf_ft: 378.0
+    rf_gap_ft: 403.0
+    rf_line_ft: 350.0
+  lf_short_porches: true
+KAN05:
+  name: Municipal Stadium
+  city: Kansas City
+  state: MO
+  year_from: 1955
+  year_to: 1972
+  altitude_ft: 916.0
+  foul_territory_sqft: 35100.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 369.0
+    lf_gap_ft: 408.0
+    cf_ft: 421.0
+    rf_gap_ft: 382.0
+    rf_line_ft: 338.0
+  wall_heights_ft:
+    lf: 13.0
+    cf: 22.0
+    rf: 12.0
+KAN06:
+  name: Kauffman Stadium
+  city: Kansas City
+  state: MO
+  year_from: 1973
+  altitude_ft: 886.0
+  foul_territory_sqft: 22900.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 385.0
+    cf_ft: 410.0
+    rf_gap_ft: 385.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+KEO01:
+  name: Perry Park
+  city: Keokuk
+  state: IA
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 641.0
+  roof: open
+  surface: grass
+LAS01:
+  name: Cashman Field
+  city: Las Vegas
+  state: NV
+  year_from: 1996
+  year_to: 1996
+  altitude_ft: 1907.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 328.0
+    lf_gap_ft: 355.0
+    cf_ft: 433.0
+    rf_gap_ft: 355.0
+    rf_line_ft: 328.0
+  wall_heights_ft:
+    lf: 18.0
+    lf_gap: 18.0
+    cf: 18.0
+    rf_gap: 18.0
+    rf: 18.0
+  lf_short_porches: true
+  rf_short_porches: true
+LBV01:
+  name: The Ballpark at Disney's Wide World
+  city: Lake Buena Vista
+  state: FL
+  year_from: 2007
+  year_to: 2008
+  altitude_ft: 98.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    lf_gap_ft: 385.0
+    cf_ft: 400.0
+    rf_gap_ft: 385.0
+    rf_line_ft: 335.0
+LON01:
+  name: London Stadium
+  city: London
+  state: England
+  year_from: 2019
+  year_to: 2019
+  altitude_ft: 206.0
+  roof: open
+  surface: turf
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 382.0
+    cf_ft: 385.0
+    rf_gap_ft: 382.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 16.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+LOS01:
+  name: Los Angeles Memorial Coliseum
+  city: Los Angeles
+  state: CA
+  year_from: 1958
+  year_to: 1961
+  altitude_ft: 139.0
+  foul_territory_sqft: 33500.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 252.0
+    lf_gap_ft: 380.0
+    cf_ft: 420.0
+    rf_gap_ft: 380.0
+    rf_line_ft: 300.0
+  wall_heights_ft:
+    lf: 42.0
+    cf: 8.0
+    rf: 6.0
+  lf_short_porches: true
+  rf_short_porches: true
+LOS02:
+  name: Wrigley Field
+  city: Los Angeles
+  state: CA
+  year_from: 1961
+  year_to: 1961
+  altitude_ft: 188.0
+  foul_territory_sqft: 22300.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 340.0
+    lf_gap_ft: 345.0
+    cf_ft: 412.0
+    rf_gap_ft: 345.0
+    rf_line_ft: 339.0
+  wall_heights_ft:
+    lf: 15.0
+    cf: 12.0
+    rf: 9.0
+LOS03:
+  name: Dodger Stadium
+  city: Los Angeles
+  state: CA
+  year_from: 1962
+  altitude_ft: 501.0
+  foul_territory_sqft: 19300.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 375.0
+    cf_ft: 400.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 4.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 4.0
+  lf_short_porches: true
+  rf_short_porches: true
+LOU01:
+  name: Louisville Baseball Park
+  city: Louisville
+  state: KY
+  year_from: 1876
+  year_to: 1877
+  altitude_ft: 461.0
+  roof: open
+  surface: grass
+LOU02:
+  name: Eclipse Park I
+  city: Louisville
+  state: KY
+  year_from: 1882
+  year_to: 1893
+  altitude_ft: 452.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 360.0
+    lf_gap_ft: 432.0
+    cf_ft: 452.0
+    rf_gap_ft: 368.0
+    rf_line_ft: 320.0
+  wall_heights_ft:
+    lf: 12.0
+    lf_gap: 12.0
+    cf: 12.0
+    rf_gap: 12.0
+    rf: 12.0
+  rf_short_porches: true
+LOU03:
+  name: Eclipse Park II
+  city: Louisville
+  state: KY
+  year_from: 1893
+  year_to: 1899
+  altitude_ft: 452.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 337.0
+    lf_gap_ft: 420.0
+    cf_ft: 430.0
+    rf_gap_ft: 420.0
+    rf_line_ft: 280.0
+  rf_short_porches: true
+LOU04:
+  name: Eclipse Park III
+  city: Louisville
+  state: KY
+  year_from: 1899
+  year_to: 1899
+  altitude_ft: 452.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 235.0
+    lf_gap_ft: 405.0
+    cf_ft: 398.0
+    rf_gap_ft: 410.0
+    rf_line_ft: 235.0
+  lf_short_porches: true
+  rf_short_porches: true
+LUD01:
+  name: Ludlow Baseball Park
+  city: Ludlow
+  state: KY
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 599.0
+  roof: open
+  surface: grass
+MAS01:
+  name: Long Island Grounds
+  city: Maspeth
+  state: NY
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 28.0
+  roof: open
+  surface: grass
+MIA01:
+  name: Sun Life Stadium
+  city: Miami
+  state: FL
+  year_from: 1993
+  year_to: 2011
+  altitude_ft: 5.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 385.0
+    cf_ft: 404.0
+    rf_gap_ft: 385.0
+    rf_line_ft: 345.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 33.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+MIA02:
+  name: Marlins Park
+  city: Miami
+  state: FL
+  year_from: 2012
+  altitude_ft: 6.0
+  foul_territory_sqft: 21000.0
+  roof: retractable
+  surface: grass
+  dims:
+    lf_line_ft: 344.0
+    lf_gap_ft: 380.0
+    cf_ft: 407.0
+    rf_gap_ft: 386.0
+    rf_line_ft: 335.0
+  wall_heights_ft:
+    lf: 7.0
+    lf_gap: 14.0
+    cf: 20.0
+    rf_gap: 11.0
+    rf: 7.0
+MID01:
+  name: Mansfield Club Grounds
+  city: Middletown
+  state: CT
+  year_from: 1872
+  year_to: 1872
+  altitude_ft: 105.0
+  roof: open
+  surface: grass
+MIL01:
+  name: Milwaukee Base-Ball Grounds
+  city: Milwaukee
+  state: WI
+  year_from: 1878
+  year_to: 1878
+  altitude_ft: 611.0
+  roof: open
+  surface: grass
+MIL02:
+  name: Wright Street Grounds
+  city: Milwaukee
+  state: WI
+  year_from: 1884
+  year_to: 1885
+  altitude_ft: 687.0
+  roof: open
+  surface: grass
+MIL03:
+  name: Athletic Park
+  city: Milwaukee
+  state: WI
+  year_from: 1891
+  year_to: 1891
+  altitude_ft: 681.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 266.0
+    cf_ft: 395.0
+    rf_line_ft: 266.0
+  lf_short_porches: true
+  rf_short_porches: true
+MIL04:
+  name: Lloyd Street Grounds
+  city: Milwaukee
+  state: WI
+  year_from: 1901
+  year_to: 1901
+  altitude_ft: 677.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 295.0
+    lf_gap_ft: 384.0
+    cf_ft: 380.0
+    rf_gap_ft: 384.0
+    rf_line_ft: 295.0
+  wall_heights_ft:
+    lf: 20.0
+    lf_gap: 20.0
+    cf: 10.0
+    rf_gap: 10.0
+    rf: 10.0
+  lf_short_porches: true
+  rf_short_porches: true
+MIL05:
+  name: County Stadium
+  city: Milwaukee
+  state: WI
+  year_from: 1953
+  year_to: 2000
+  altitude_ft: 606.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 315.0
+    lf_gap_ft: 362.0
+    cf_ft: 402.0
+    rf_gap_ft: 362.0
+    rf_line_ft: 315.0
+  wall_heights_ft:
+    lf: 10.0
+    cf: 10.0
+    rf: 10.0
+  lf_short_porches: true
+  rf_short_porches: true
+MIL06:
+  name: Miller Park
+  city: Milwaukee
+  state: WI
+  year_from: 2001
+  altitude_ft: 602.0
+  foul_territory_sqft: 21100.0
+  roof: retractable
+  surface: grass
+  dims:
+    lf_line_ft: 344.0
+    lf_gap_ft: 371.0
+    cf_ft: 400.0
+    rf_gap_ft: 371.0
+    rf_line_ft: 345.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 6.0
+MIN01:
+  name: Athletic Park
+  city: Minneapolis
+  state: MN
+  year_from: 1891
+  year_to: 1891
+  altitude_ft: 849.0
+  roof: open
+  surface: grass
+MIN02:
+  name: Metropolitan Stadium
+  city: Bloomington
+  state: MN
+  year_from: 1961
+  year_to: 1981
+  altitude_ft: 821.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 343.0
+    lf_gap_ft: 406.0
+    cf_ft: 402.0
+    rf_gap_ft: 410.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 8.0
+    rf: 8.0
+  rf_short_porches: true
+MIN03:
+  name: Hubert H. Humphrey Metrodome
+  city: Minneapolis
+  state: MN
+  year_from: 1982
+  year_to: 2009
+  altitude_ft: 854.0
+  foul_territory_sqft: 34300.0
+  roof: dome
+  surface: turf
+  dims:
+    lf_line_ft: 343.0
+    lf_gap_ft: 385.0
+    cf_ft: 408.0
+    rf_gap_ft: 367.0
+    rf_line_ft: 327.0
+  wall_heights_ft:
+    lf: 7.0
+    lf_gap: 7.0
+    cf: 7.0
+    rf_gap: 23.0
+    rf: 23.0
+  rf_short_porches: true
+MIN04:
+  name: Target Field
+  city: Minneapolis
+  state: MN
+  year_from: 2010
+  altitude_ft: 840.0
+  foul_territory_sqft: 20400.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 339.0
+    lf_gap_ft: 377.0
+    cf_ft: 404.0
+    rf_gap_ft: 367.0
+    rf_line_ft: 328.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 23.0
+    rf: 23.0
+  rf_short_porches: true
+MNT01:
+  name: Estadio Monterrey
+  city: Monterrey
+  state: MX
+  year_from: 1996
+  year_to: 1999
+  altitude_ft: 1743.0
+  foul_territory_sqft: 21100.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 363.0
+    cf_ft: 400.0
+    rf_gap_ft: 363.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 8.0
+    cf: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+MON01:
+  name: Parc Jarry
+  city: Montreal
+  state: QUE
+  year_from: 1969
+  year_to: 1976
+  altitude_ft: 190.0
+  foul_territory_sqft: 25300.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 340.0
+    lf_gap_ft: 368.0
+    cf_ft: 420.0
+    rf_gap_ft: 368.0
+    rf_line_ft: 340.0
+  wall_heights_ft:
+    lf: 8.0
+    cf: 8.0
+    rf: 8.0
+MON02:
+  name: Stade Olympique
+  city: Montreal
+  state: QUE
+  year_from: 1977
+  year_to: 2004
+  altitude_ft: 89.0
+  foul_territory_sqft: 27500.0
+  roof: dome
+  surface: turf
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 375.0
+    cf_ft: 404.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 10.0
+    cf: 10.0
+    rf: 10.0
+  lf_short_porches: true
+  rf_short_porches: true
+NEW01:
+  name: Howard Avenue Grounds
+  city: New Haven
+  state: CT
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 63.0
+  roof: open
+  surface: grass
+NEW02:
+  name: Hamilton Park
+  city: New Haven
+  state: CT
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 63.0
+  roof: open
+  surface: grass
+NEW03:
+  name: Beyerle's Park
+  city: Newburgh Township
+  state: OH
+  year_from: 1888
+  year_to: 1888
+  altitude_ft: 394.0
+  roof: open
+  surface: grass
+NWK01:
+  name: Wiedenmeyer's Park
+  city: Newark
+  state: NJ
+  year_from: 1904
+  year_to: 1904
+  altitude_ft: 13.0
+  roof: open
+  surface: grass
+NYC01:
+  name: Union Grounds
+  city: Brooklyn
+  state: NY
+  year_from: 1871
+  year_to: 1877
+  altitude_ft: 38.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 500.0
+    cf_ft: 500.0
+    rf_line_ft: 350.0
+  wall_heights_ft:
+    lf: 6.0
+    cf: 6.0
+    rf: 6.0
+NYC02:
+  name: Capitoline Grounds
+  city: Brooklyn
+  state: NY
+  year_from: 1872
+  year_to: 1872
+  altitude_ft: 49.0
+  roof: open
+  surface: grass
+NYC03:
+  name: Polo Grounds I (Southeast Diamond)
+  city: New York
+  state: NY
+  year_from: 1883
+  year_to: 1888
+  altitude_ft: 20.0
+  roof: open
+  surface: grass
+NYC04:
+  name: Polo Grounds II (Southwest Diamond)
+  city: New York
+  state: NY
+  year_from: 1883
+  year_to: 1883
+  altitude_ft: 21.0
+  roof: open
+  surface: grass
+NYC05:
+  name: Washington Park I
+  city: Brooklyn
+  state: NY
+  year_from: 1884
+  year_to: 1889
+  altitude_ft: 30.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    cf_ft: 445.0
+    rf_line_ft: 215.0
+  rf_short_porches: true
+NYC06:
+  name: Metropolitan Park
+  city: New York
+  state: NY
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 6.0
+  roof: open
+  surface: grass
+NYC07:
+  name: Grauer's Ridgewood Park
+  city: Queens
+  state: NY
+  year_from: 1886
+  year_to: 1886
+  altitude_ft: 75.0
+  roof: open
+  surface: grass
+NYC08:
+  name: Washington Park II
+  city: Brooklyn
+  state: NY
+  year_from: 1889
+  year_to: 1890
+  altitude_ft: 30.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    cf_ft: 445.0
+    rf_line_ft: 215.0
+  rf_short_porches: true
+NYC09:
+  name: Polo Grounds III
+  city: New York
+  state: NY
+  year_from: 1889
+  year_to: 1890
+  altitude_ft: 18.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 384.0
+    lf_gap_ft: 400.0
+    cf_ft: 372.0
+    rf_gap_ft: 361.0
+    rf_line_ft: 300.0
+  wall_heights_ft:
+    lf: 6.0
+    lf_gap: 6.0
+    cf: 6.0
+    rf_gap: 6.0
+    rf: 6.0
+  rf_short_porches: true
+NYC10:
+  name: Polo Grounds IV
+  city: New York
+  state: NY
+  year_from: 1890
+  year_to: 1911
+  altitude_ft: 13.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 277.0
+    lf_gap_ft: 446.0
+    cf_ft: 433.0
+    rf_gap_ft: 404.0
+    rf_line_ft: 258.0
+  wall_heights_ft:
+    lf: 10.0
+    lf_gap: 10.0
+    cf: 8.0
+    rf_gap: 10.0
+    rf: 10.0
+  lf_short_porches: true
+  rf_short_porches: true
+NYC11:
+  name: Eastern Park
+  city: Brooklyn
+  state: NY
+  year_from: 1890
+  year_to: 1897
+  altitude_ft: 40.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 235.0
+    lf_gap_ft: 425.0
+    cf_ft: 413.0
+    rf_gap_ft: 425.0
+    rf_line_ft: 235.0
+  lf_short_porches: true
+  rf_short_porches: true
+NYC12:
+  name: Washington Park III
+  city: Brooklyn
+  state: NY
+  year_from: 1898
+  year_to: 1912
+  altitude_ft: 26.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 338.0
+    lf_gap_ft: 415.0
+    cf_ft: 425.0
+    rf_gap_ft: 349.0
+    rf_line_ft: 302.0
+  wall_heights_ft:
+    lf: 12.0
+    lf_gap: 12.0
+    cf: 8.0
+    rf_gap: 20.0
+    rf: 20.0
+  rf_short_porches: true
+NYC13:
+  name: Hilltop Park
+  city: New York
+  state: NY
+  year_from: 1903
+  year_to: 1912
+  altitude_ft: 164.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 365.0
+    lf_gap_ft: 378.0
+    cf_ft: 370.0
+    rf_gap_ft: 405.0
+    rf_line_ft: 365.0
+  wall_heights_ft:
+    lf: 16.0
+    lf_gap: 12.0
+    cf: 3.0
+    rf_gap: 16.0
+    rf: 12.0
+NYC14:
+  name: Polo Grounds V
+  city: New York
+  state: NY
+  year_from: 1911
+  year_to: 1963
+  altitude_ft: 13.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 279.0
+    lf_gap_ft: 455.0
+    cf_ft: 483.0
+    rf_gap_ft: 449.0
+    rf_line_ft: 258.0
+  wall_heights_ft:
+    lf: 17.0
+    cf: 8.0
+    rf: 11.0
+  lf_short_porches: true
+  rf_short_porches: true
+NYC15:
+  name: Ebbets Field
+  city: Brooklyn
+  state: NY
+  year_from: 1913
+  year_to: 1957
+  altitude_ft: 84.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 348.0
+    lf_gap_ft: 368.0
+    cf_ft: 384.0
+    rf_gap_ft: 352.0
+    rf_line_ft: 297.0
+  wall_heights_ft:
+    lf: 10.0
+    lf_gap: 10.0
+    cf: 10.0
+    rf_gap: 20.0
+    rf: 38.0
+  rf_short_porches: true
+NYC16:
+  name: Yankee Stadium I
+  city: New York
+  state: NY
+  year_from: 1923
+  year_to: 2008
+  altitude_ft: 18.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 318.0
+    lf_gap_ft: 392.0
+    cf_ft: 408.0
+    rf_gap_ft: 385.0
+    rf_line_ft: 314.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 7.0
+    cf: 7.0
+    rf_gap: 9.0
+    rf: 10.0
+  lf_short_porches: true
+  rf_short_porches: true
+NYC17:
+  name: Shea Stadium
+  city: New York
+  state: NY
+  year_from: 1964
+  year_to: 2008
+  altitude_ft: 13.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 338.0
+    lf_gap_ft: 378.0
+    cf_ft: 410.0
+    rf_gap_ft: 378.0
+    rf_line_ft: 338.0
+  wall_heights_ft:
+    lf: 8.0
+    cf: 8.0
+    rf: 8.0
+NYC18:
+  name: Wallace's Ridgewood Park
+  city: Queens
+  state: NY
+  year_from: 1887
+  year_to: 1890
+  altitude_ft: 71.0
+  roof: open
+  surface: grass
+NYC19:
+  name: Washington Park IV
+  city: Brooklyn
+  state: NY
+  year_from: 1914
+  year_to: 1915
+  altitude_ft: 26.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 363.0
+    cf_ft: 435.0
+    rf_gap_ft: 345.0
+    rf_line_ft: 275.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 12.0
+    rf: 20.0
+  lf_short_porches: true
+  rf_short_porches: true
+NYC20:
+  name: Citi Field
+  city: New York
+  state: NY
+  year_from: 2009
+  altitude_ft: 13.0
+  foul_territory_sqft: 20700.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 331.0
+    lf_gap_ft: 358.0
+    cf_ft: 408.0
+    rf_gap_ft: 384.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 11.0
+    rf_gap: 18.0
+    rf: 8.0
+  rf_short_porches: true
+NYC21:
+  name: Yankee Stadium II
+  city: New York
+  state: NY
+  year_from: 2009
+  altitude_ft: 11.0
+  foul_territory_sqft: 19700.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 318.0
+    lf_gap_ft: 382.0
+    cf_ft: 408.0
+    rf_gap_ft: 360.0
+    rf_line_ft: 314.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+OAK01:
+  name: Oakland-Alameda County Coliseum
+  city: Oakland
+  state: CA
+  year_from: 1968
+  altitude_ft: 0.0
+  foul_territory_sqft: 40700.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 362.0
+    cf_ft: 400.0
+    rf_gap_ft: 362.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 15.0
+    cf: 8.0
+    rf_gap: 15.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+OMA01:
+  name: TD Ameritrade Park
+  city: Omaha
+  state: NE
+  year_from: 2019
+  year_to: 2019
+  altitude_ft: 989.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    lf_gap_ft: 375.0
+    cf_ft: 408.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 335.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+PEN01:
+  name: East End Park
+  city: Cincinnati
+  state: OH
+  year_from: 1891
+  year_to: 1891
+  altitude_ft: 476.0
+  roof: open
+  surface: grass
+PHI01:
+  name: Jefferson Street Grounds
+  city: Philadelphia
+  state: PA
+  year_from: 1871
+  year_to: 1890
+  altitude_ft: 104.0
+  roof: open
+  surface: grass
+  dims:
+    cf_ft: 500.0
+  wall_heights_ft:
+    lf: 3.0
+    rf: 3.0
+PHI02:
+  name: Centennial Park
+  city: Philadelphia
+  state: PA
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 104.0
+  roof: open
+  surface: grass
+PHI03:
+  name: Oakdale Park
+  city: Philadelphia
+  state: PA
+  year_from: 1882
+  year_to: 1882
+  altitude_ft: 99.0
+  roof: open
+  surface: grass
+PHI04:
+  name: Recreation Park
+  city: Philadelphia
+  state: PA
+  year_from: 1883
+  year_to: 1886
+  altitude_ft: 104.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 300.0
+    lf_gap_ft: 307.0
+    cf_ft: 337.0
+    rf_gap_ft: 369.0
+    rf_line_ft: 247.0
+  lf_short_porches: true
+  rf_short_porches: true
+PHI05:
+  name: Keystone Park
+  city: Philadelphia
+  state: PA
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 26.0
+  roof: open
+  surface: grass
+PHI06:
+  name: Huntingdon Grounds I
+  city: Philadelphia
+  state: PA
+  year_from: 1887
+  year_to: 1894
+  altitude_ft: 98.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 383.0
+    lf_gap_ft: 425.0
+    cf_ft: 420.0
+    rf_gap_ft: 345.0
+    rf_line_ft: 299.0
+  wall_heights_ft:
+    lf: 25.0
+    cf: 25.0
+    rf: 25.0
+  rf_short_porches: true
+PHI07:
+  name: Forepaugh Park
+  city: Philadelphia
+  state: PA
+  year_from: 1890
+  year_to: 1891
+  altitude_ft: 77.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 345.0
+    cf_ft: 450.0
+    rf_line_ft: 380.0
+PHI08:
+  name: University of Penn. Athletic Field
+  city: Philadelphia
+  state: PA
+  year_from: 1894
+  year_to: 1894
+  altitude_ft: 77.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 225.0
+    lf_gap_ft: 375.0
+    cf_ft: 400.0
+    rf_gap_ft: 390.0
+    rf_line_ft: 225.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+PHI09:
+  name: Baker Bowl
+  city: Philadelphia
+  state: PA
+  year_from: 1895
+  year_to: 1938
+  altitude_ft: 98.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 341.0
+    lf_gap_ft: 365.0
+    cf_ft: 408.0
+    rf_gap_ft: 315.0
+    rf_line_ft: 280.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 35.0
+    rf: 60.0
+  rf_short_porches: true
+PHI10:
+  name: Columbia Park
+  city: Philadelphia
+  state: PA
+  year_from: 1901
+  year_to: 1908
+  altitude_ft: 98.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 340.0
+    lf_gap_ft: 392.0
+    cf_ft: 396.0
+    rf_gap_ft: 323.0
+    rf_line_ft: 280.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 11.0
+    rf: 8.0
+  rf_short_porches: true
+PHI11:
+  name: Shibe Park
+  city: Philadelphia
+  state: PA
+  year_from: 1909
+  year_to: 1970
+  altitude_ft: 116.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 334.0
+    lf_gap_ft: 387.0
+    cf_ft: 410.0
+    rf_gap_ft: 390.0
+    rf_line_ft: 329.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 3.0
+    rf: 32.0
+  rf_short_porches: true
+PHI12:
+  name: Veterans Stadium
+  city: Philadelphia
+  state: PA
+  year_from: 1971
+  year_to: 2003
+  altitude_ft: 18.0
+  roof: open
+  surface: turf
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 371.0
+    cf_ft: 408.0
+    rf_gap_ft: 371.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 12.0
+    rf: 12.0
+  lf_short_porches: true
+  rf_short_porches: true
+PHI13:
+  name: Citizens Bank Park
+  city: Philadelphia
+  state: PA
+  year_from: 2004
+  altitude_ft: 19.0
+  foul_territory_sqft: 24500.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 329.0
+    lf_gap_ft: 361.0
+    cf_ft: 401.0
+    rf_gap_ft: 357.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 11.0
+    lf_gap: 11.0
+    cf: 6.0
+    rf_gap: 13.0
+    rf: 13.0
+  lf_short_porches: true
+  rf_short_porches: true
+PHI14:
+  name: Huntingdon Grounds II
+  city: Philadelphia
+  state: PA
+  year_from: 1894
+  year_to: 1894
+  altitude_ft: 98.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 408.0
+    lf_gap_ft: 425.0
+    cf_ft: 420.0
+    rf_gap_ft: 345.0
+    rf_line_ft: 299.0
+  wall_heights_ft:
+    lf: 25.0
+    cf: 25.0
+    rf: 25.0
+  rf_short_porches: true
+PHO01:
+  name: Chase Field
+  city: Phoenix
+  state: AZ
+  year_from: 1998
+  altitude_ft: 1059.0
+  foul_territory_sqft: 25500.0
+  roof: retractable
+  surface: turf
+  dims:
+    lf_line_ft: 328.0
+    lf_gap_ft: 376.0
+    cf_ft: 407.0
+    rf_gap_ft: 376.0
+    rf_line_ft: 335.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 25.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+PIT01:
+  name: Union Park
+  city: Pittsburgh
+  state: PA
+  year_from: 1878
+  year_to: 1878
+  altitude_ft: 767.0
+  roof: open
+  surface: grass
+PIT02:
+  name: Exposition Park I
+  city: Pittsburgh
+  state: PA
+  year_from: 1882
+  year_to: 1884
+  altitude_ft: 729.0
+  roof: open
+  surface: grass
+PIT03:
+  name: Exposition Park II
+  city: Pittsburgh
+  state: PA
+  year_from: 1883
+  year_to: 1883
+  altitude_ft: 729.0
+  roof: open
+  surface: grass
+PIT04:
+  name: Recreation Park
+  city: Pittsburgh
+  state: PA
+  year_from: 1884
+  year_to: 1890
+  altitude_ft: 765.0
+  roof: open
+  surface: grass
+PIT05:
+  name: Exposition Park III
+  city: Pittsburgh
+  state: PA
+  year_from: 1890
+  year_to: 1915
+  altitude_ft: 729.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 400.0
+    lf_gap_ft: 475.0
+    cf_ft: 515.0
+    rf_gap_ft: 439.0
+    rf_line_ft: 380.0
+  wall_heights_ft:
+    lf: 3.0
+    lf_gap: 10.0
+    cf: 10.0
+    rf_gap: 20.0
+    rf: 10.0
+PIT06:
+  name: Forbes Field
+  city: Pittsburgh
+  state: PA
+  year_from: 1909
+  year_to: 1970
+  altitude_ft: 893.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 365.0
+    lf_gap_ft: 406.0
+    cf_ft: 435.0
+    rf_gap_ft: 408.0
+    rf_line_ft: 300.0
+  wall_heights_ft:
+    lf: 14.0
+    cf: 12.0
+    rf: 28.0
+  rf_short_porches: true
+PIT07:
+  name: Three Rivers Stadium
+  city: Pittsburgh
+  state: PA
+  year_from: 1970
+  year_to: 2000
+  altitude_ft: 730.0
+  roof: open
+  surface: turf
+  dims:
+    lf_line_ft: 335.0
+    lf_gap_ft: 375.0
+    cf_ft: 400.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 335.0
+  wall_heights_ft:
+    lf: 10.0
+    cf: 10.0
+    rf: 10.0
+PIT08:
+  name: PNC Park
+  city: Pittsburgh
+  state: PA
+  year_from: 2001
+  altitude_ft: 724.0
+  foul_territory_sqft: 22200.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 389.0
+    cf_ft: 399.0
+    rf_gap_ft: 395.0
+    rf_line_ft: 320.0
+  wall_heights_ft:
+    lf: 6.0
+    lf_gap: 10.0
+    cf: 10.0
+    rf_gap: 21.0
+    rf: 21.0
+  lf_short_porches: true
+  rf_short_porches: true
+PRO01:
+  name: Adelaide Avenue Grounds
+  city: Providence
+  state: RI
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 61.0
+  roof: open
+  surface: grass
+PRO02:
+  name: Messer Street Grounds
+  city: Providence
+  state: RI
+  year_from: 1878
+  year_to: 1885
+  altitude_ft: 83.0
+  roof: open
+  surface: grass
+RCK01:
+  name: Agricultural Society Fair Grounds
+  city: Rockford
+  state: IL
+  year_from: 1871
+  year_to: 1871
+  altitude_ft: 714.0
+  roof: open
+  surface: grass
+RIC01:
+  name: Richmond Fair Grounds
+  city: Richmond
+  state: VA
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 185.0
+  roof: open
+  surface: grass
+RIC02:
+  name: Allens Pasture
+  city: Richmond
+  state: VA
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 205.0
+  roof: open
+  surface: grass
+ROC01:
+  name: Culver Field I
+  city: Rochester
+  state: NY
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 492.0
+  roof: open
+  surface: grass
+ROC02:
+  name: Culver Field II
+  city: Rochester
+  state: NY
+  year_from: 1898
+  year_to: 1898
+  altitude_ft: 492.0
+  roof: open
+  surface: grass
+ROC03:
+  name: Ontario Beach Grounds
+  city: Rochester
+  state: NY
+  year_from: 1898
+  year_to: 1898
+  altitude_ft: 268.0
+  roof: open
+  surface: grass
+SAI01:
+  name: St. George Cricket Grounds
+  city: New York
+  state: NY
+  year_from: 1886
+  year_to: 1889
+  altitude_ft: 5.0
+  roof: open
+  surface: grass
+SAN01:
+  name: Qualcomm Stadium
+  city: San Diego
+  state: CA
+  year_from: 1969
+  year_to: 2003
+  altitude_ft: 83.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 327.0
+    lf_gap_ft: 370.0
+    cf_ft: 405.0
+    rf_gap_ft: 370.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 8.0
+    cf: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+SAN02:
+  name: PETCO Park
+  city: San Diego
+  state: CA
+  year_from: 2004
+  altitude_ft: 14.0
+  foul_territory_sqft: 23900.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 336.0
+    lf_gap_ft: 377.0
+    cf_ft: 396.0
+    rf_gap_ft: 380.0
+    rf_line_ft: 322.0
+  wall_heights_ft:
+    lf: 4.0
+    lf_gap: 7.5
+    cf: 7.0
+    rf_gap: 10.0
+    rf: 10.0
+  rf_short_porches: true
+SEA01:
+  name: Sick's Stadium
+  city: Seattle
+  state: WA
+  year_from: 1969
+  year_to: 1969
+  altitude_ft: 61.0
+  foul_territory_sqft: 19900.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 305.0
+    lf_gap_ft: 345.0
+    cf_ft: 402.0
+    rf_gap_ft: 345.0
+    rf_line_ft: 320.0
+  wall_heights_ft:
+    lf: 8.0
+    cf: 13.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+SEA02:
+  name: Kingdome
+  city: Seattle
+  state: WA
+  year_from: 1977
+  year_to: 1999
+  altitude_ft: 17.0
+  foul_territory_sqft: 28000.0
+  roof: dome
+  surface: turf
+  dims:
+    lf_line_ft: 331.0
+    lf_gap_ft: 375.0
+    cf_ft: 410.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 312.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 12.0
+    rf: 12.0
+  rf_short_porches: true
+SEA03:
+  name: Safeco Field
+  city: Seattle
+  state: WA
+  year_from: 1999
+  altitude_ft: 17.0
+  foul_territory_sqft: 24300.0
+  roof: retractable
+  surface: grass
+  dims:
+    lf_line_ft: 331.0
+    lf_gap_ft: 368.0
+    cf_ft: 401.0
+    rf_gap_ft: 357.0
+    rf_line_ft: 326.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  rf_short_porches: true
+SFO01:
+  name: Seals Stadium
+  city: San Francisco
+  state: CA
+  year_from: 1958
+  year_to: 1959
+  altitude_ft: 61.0
+  foul_territory_sqft: 22700.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 361.0
+    lf_gap_ft: 364.0
+    cf_ft: 400.0
+    rf_gap_ft: 397.0
+    rf_line_ft: 350.0
+  wall_heights_ft:
+    lf: 15.0
+    cf: 31.0
+    rf: 16.0
+SFO02:
+  name: Candlestick Park
+  city: San Francisco
+  state: CA
+  year_from: 1960
+  year_to: 1999
+  altitude_ft: 135.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    lf_gap_ft: 365.0
+    cf_ft: 400.0
+    rf_gap_ft: 365.0
+    rf_line_ft: 328.0
+  wall_heights_ft:
+    lf: 8.0
+    cf: 9.0
+    rf: 9.0
+  rf_short_porches: true
+SFO03:
+  name: AT&T Park
+  city: San Francisco
+  state: CA
+  year_from: 2000
+  altitude_ft: 8.0
+  foul_territory_sqft: 25500.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 339.0
+    lf_gap_ft: 364.0
+    cf_ft: 399.0
+    rf_gap_ft: 365.0
+    rf_line_ft: 309.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 11.0
+    cf: 8.0
+    rf_gap: 25.0
+    rf: 25.0
+  rf_short_porches: true
+SJU01:
+  name: Estadio Hiram Bithorn
+  city: San Juan
+  state: PR
+  year_from: 2001
+  year_to: 2010
+  altitude_ft: 10.0
+  foul_territory_sqft: 38700.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 375.0
+    cf_ft: 404.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 12.0
+    rf: 12.0
+  lf_short_porches: true
+  rf_short_porches: true
+SPR01:
+  name: Hampden Park Race Track
+  city: Springfield
+  state: MA
+  year_from: 1872
+  year_to: 1875
+  altitude_ft: 67.0
+  roof: open
+  surface: grass
+STL01:
+  name: Red Stockings Base Ball Park
+  city: St. Louis
+  state: MO
+  year_from: 1875
+  year_to: 1875
+  altitude_ft: 462.0
+  roof: open
+  surface: grass
+STL02:
+  name: Grand Avenue Park
+  city: St. Louis
+  state: MO
+  year_from: 1875
+  year_to: 1877
+  altitude_ft: 492.0
+  roof: open
+  surface: grass
+STL03:
+  name: Sportsman's Park I
+  city: St. Louis
+  state: MO
+  year_from: 1882
+  year_to: 1892
+  altitude_ft: 492.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 350.0
+    lf_gap_ft: 400.0
+    cf_ft: 460.0
+    rf_gap_ft: 330.0
+    rf_line_ft: 285.0
+  rf_short_porches: true
+STL04:
+  name: Union Grounds
+  city: St. Louis
+  state: MO
+  year_from: 1884
+  year_to: 1886
+  altitude_ft: 507.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 285.0
+    rf_line_ft: 285.0
+  lf_short_porches: true
+  rf_short_porches: true
+STL05:
+  name: Robison Field
+  city: St. Louis
+  state: MO
+  year_from: 1893
+  year_to: 1920
+  altitude_ft: 500.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 415.0
+    lf_gap_ft: 458.0
+    cf_ft: 441.0
+    rf_gap_ft: 355.0
+    rf_line_ft: 308.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 15.0
+    rf: 8.0
+  rf_short_porches: true
+STL06:
+  name: Sportsman's Park II
+  city: St. Louis
+  state: MO
+  year_from: 1902
+  year_to: 1908
+  altitude_ft: 492.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 342.0
+    lf_gap_ft: 350.0
+    cf_ft: 390.0
+    rf_gap_ft: 400.0
+    rf_line_ft: 300.0
+  wall_heights_ft:
+    lf: 10.0
+    lf_gap: 8.0
+    cf: 15.0
+    rf_gap: 8.0
+    rf: 10.0
+  rf_short_porches: true
+STL07:
+  name: Sportsman's Park III
+  city: St. Louis
+  state: MO
+  year_from: 1909
+  year_to: 1966
+  altitude_ft: 492.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 351.0
+    lf_gap_ft: 379.0
+    cf_ft: 422.0
+    rf_gap_ft: 354.0
+    rf_line_ft: 310.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 12.0
+    rf: 37.0
+  rf_short_porches: true
+STL08:
+  name: Handlan's Park
+  city: St. Louis
+  state: MO
+  year_from: 1914
+  year_to: 1915
+  altitude_ft: 512.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 325.0
+    lf_gap_ft: 400.0
+    cf_ft: 400.0
+    rf_gap_ft: 329.0
+    rf_line_ft: 285.0
+  lf_short_porches: true
+  rf_short_porches: true
+STL09:
+  name: Busch Stadium II
+  city: St. Louis
+  state: MO
+  year_from: 1966
+  year_to: 2005
+  altitude_ft: 460.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 372.0
+    cf_ft: 402.0
+    rf_gap_ft: 372.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 8.0
+    cf: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+STL10:
+  name: Busch Stadium III
+  city: St. Louis
+  state: MO
+  year_from: 2006
+  altitude_ft: 438.0
+  foul_territory_sqft: 25400.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 336.0
+    lf_gap_ft: 381.0
+    cf_ft: 400.0
+    rf_gap_ft: 381.0
+    rf_line_ft: 335.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+STP01:
+  name: Tropicana Field
+  city: St. Petersburg
+  state: FL
+  year_from: 1998
+  altitude_ft: 41.0
+  foul_territory_sqft: 25300.0
+  roof: dome
+  surface: turf
+  dims:
+    lf_line_ft: 315.0
+    lf_gap_ft: 370.0
+    cf_ft: 404.0
+    rf_gap_ft: 360.0
+    rf_line_ft: 322.0
+  wall_heights_ft:
+    lf: 11.0
+    lf_gap: 11.0
+    cf: 9.0
+    rf_gap: 11.0
+    rf: 11.0
+  lf_short_porches: true
+  rf_short_porches: true
+SYD01:
+  name: Sydney Cricket Ground
+  city: Sydney
+  state: Australia
+  year_from: 2014
+  year_to: 2014
+  altitude_ft: 190.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 328.0
+    lf_gap_ft: 380.0
+    cf_ft: 400.0
+    rf_gap_ft: 380.0
+    rf_line_ft: 328.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 8.0
+    rf_gap: 8.0
+    rf: 8.0
+  lf_short_porches: true
+  rf_short_porches: true
+SYR01:
+  name: Star Park I
+  city: Syracuse
+  state: NY
+  year_from: 1879
+  year_to: 1879
+  altitude_ft: 392.0
+  roof: open
+  surface: grass
+SYR02:
+  name: Star Park II
+  city: Syracuse
+  state: NY
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 395.0
+  roof: open
+  surface: grass
+SYR03:
+  name: Iron Pier
+  city: Syracuse
+  state: NY
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 395.0
+  roof: open
+  surface: grass
+THR01:
+  name: Three Rivers Park
+  city: Three Rivers
+  state: NY
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 369.0
+  roof: open
+  surface: grass
+TOK01:
+  name: Tokyo Dome
+  city: Tokyo
+  state: JAP
+  year_from: 2000
+  year_to: 2008
+  altitude_ft: 57.0
+  roof: dome
+  surface: turf
+  dims:
+    lf_line_ft: 318.0
+    lf_gap_ft: 360.0
+    cf_ft: 400.0
+    rf_gap_ft: 360.0
+    rf_line_ft: 318.0
+  wall_heights_ft:
+    lf: 13.0
+    cf: 13.0
+    rf: 13.0
+  lf_short_porches: true
+  rf_short_porches: true
+TOL01:
+  name: League Park
+  city: Toledo
+  state: OH
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 609.0
+  roof: open
+  surface: grass
+TOL02:
+  name: Tri-State Fair Grounds
+  city: Toledo
+  state: OH
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 617.0
+  roof: open
+  surface: grass
+TOL03:
+  name: Speranza Park
+  city: Toledo
+  state: OH
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 609.0
+  roof: open
+  surface: grass
+TOL04:
+  name: Armory Park
+  city: Toledo
+  state: OH
+  year_from: 1903
+  year_to: 1903
+  altitude_ft: 597.0
+  roof: open
+  surface: grass
+TOR01:
+  name: Exhibition Stadium
+  city: Toronto
+  state: ONT
+  year_from: 1977
+  year_to: 1989
+  altitude_ft: 273.0
+  foul_territory_sqft: 26100.0
+  roof: open
+  surface: turf
+  dims:
+    lf_line_ft: 330.0
+    lf_gap_ft: 375.0
+    cf_ft: 410.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 330.0
+  wall_heights_ft:
+    lf: 12.0
+    cf: 12.0
+    rf: 12.0
+  lf_short_porches: true
+  rf_short_porches: true
+TOR02:
+  name: Rogers Centre
+  city: Toronto
+  state: ONT
+  year_from: 1989
+  altitude_ft: 268.0
+  roof: retractable
+  surface: turf
+  dims:
+    lf_line_ft: 328.0
+    lf_gap_ft: 375.0
+    cf_ft: 400.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 328.0
+  wall_heights_ft:
+    lf: 10.0
+    lf_gap: 10.0
+    cf: 10.0
+    rf_gap: 10.0
+    rf: 10.0
+  lf_short_porches: true
+  rf_short_porches: true
+TRO01:
+  name: Haymakers' Grounds
+  city: Troy
+  state: NY
+  year_from: 1871
+  year_to: 1881
+  altitude_ft: 32.0
+  roof: open
+  surface: grass
+TRO02:
+  name: Putnam Grounds
+  city: Troy
+  state: NY
+  year_from: 1879
+  year_to: 1882
+  altitude_ft: 250.0
+  roof: open
+  surface: grass
+WAR01:
+  name: Rocky Point Park
+  city: Warwick
+  state: RI
+  year_from: 1903
+  year_to: 1903
+  altitude_ft: 38.0
+  roof: open
+  surface: grass
+WAS01:
+  name: Olympic Grounds
+  city: Washington
+  state: DC
+  year_from: 1871
+  year_to: 1875
+  altitude_ft: 91.0
+  roof: open
+  surface: grass
+WAS02:
+  name: National Grounds
+  city: Washington
+  state: DC
+  year_from: 1872
+  year_to: 1872
+  altitude_ft: 89.0
+  roof: open
+  surface: grass
+WAS03:
+  name: Capitol Grounds
+  city: Washington
+  state: DC
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 74.0
+  roof: open
+  surface: grass
+WAS04:
+  name: Athletic Park
+  city: Washington
+  state: DC
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 85.0
+  roof: open
+  surface: grass
+WAS05:
+  name: Swampoodle Grounds
+  city: Washington
+  state: DC
+  year_from: 1886
+  year_to: 1889
+  altitude_ft: 40.0
+  roof: open
+  surface: grass
+WAS06:
+  name: Boundary Field
+  city: Washington
+  state: DC
+  year_from: 1891
+  year_to: 1899
+  altitude_ft: 100.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 344.0
+    lf_gap_ft: 400.0
+    cf_ft: 400.0
+    rf_gap_ft: 400.0
+    rf_line_ft: 305.0
+  rf_short_porches: true
+WAS07:
+  name: American League Park I
+  city: Washington
+  state: DC
+  year_from: 1901
+  year_to: 1903
+  altitude_ft: 48.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 272.0
+    lf_gap_ft: 345.0
+    cf_ft: 438.0
+    rf_gap_ft: 381.0
+    rf_line_ft: 341.0
+  wall_heights_ft:
+    lf: 14.0
+    lf_gap: 14.0
+    cf: 14.0
+    rf_gap: 14.0
+    rf: 14.0
+  lf_short_porches: true
+WAS08:
+  name: American League Park II
+  city: Washington
+  state: DC
+  year_from: 1904
+  year_to: 1910
+  altitude_ft: 100.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 320.0
+    lf_gap_ft: 390.0
+    cf_ft: 402.0
+    rf_gap_ft: 390.0
+    rf_line_ft: 325.0
+  wall_heights_ft:
+    lf: 10.0
+    lf_gap: 10.0
+    cf: 10.0
+    rf_gap: 16.0
+    rf: 10.0
+  lf_short_porches: true
+  rf_short_porches: true
+WAS09:
+  name: Griffith Stadium
+  city: Washington
+  state: DC
+  year_from: 1911
+  year_to: 1961
+  altitude_ft: 100.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 405.0
+    lf_gap_ft: 383.0
+    cf_ft: 409.0
+    rf_gap_ft: 418.0
+    rf_line_ft: 320.0
+  wall_heights_ft:
+    lf: 11.0
+    lf_gap: 11.0
+    cf: 31.0
+    rf_gap: 31.0
+    rf: 31.0
+  rf_short_porches: true
+WAS10:
+  name: Robert F. Kennedy Stadium
+  city: Washington
+  state: DC
+  year_from: 1962
+  year_to: 2007
+  altitude_ft: 24.0
+  foul_territory_sqft: 29700.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 335.0
+    lf_gap_ft: 381.0
+    cf_ft: 408.0
+    rf_gap_ft: 380.0
+    rf_line_ft: 335.0
+  wall_heights_ft:
+    lf: 7.0
+    cf: 7.0
+    rf: 7.0
+WAS11:
+  name: Nationals Park
+  city: Washington
+  state: DC
+  year_from: 2008
+  altitude_ft: 23.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 336.0
+    lf_gap_ft: 377.0
+    cf_ft: 402.0
+    rf_gap_ft: 370.0
+    rf_line_ft: 335.0
+  wall_heights_ft:
+    lf: 8.0
+    lf_gap: 8.0
+    cf: 12.0
+    rf_gap: 12.0
+    rf: 12.0
+WAT01:
+  name: Troy Ball Club Grounds
+  city: Watervliet
+  state: NY
+  year_from: 1882
+  year_to: 1882
+  altitude_ft: 47.0
+  roof: open
+  surface: grass
+WAV01:
+  name: Waverly Fairgrounds
+  city: Waverly
+  state: NJ
+  year_from: 1873
+  year_to: 1873
+  altitude_ft: 18.0
+  roof: open
+  surface: grass
+WEE01:
+  name: Monitor Grounds
+  city: Weehawken
+  state: NJ
+  year_from: 1887
+  year_to: 1887
+  altitude_ft: 179.0
+  roof: open
+  surface: grass
+WHE01:
+  name: Island Grounds
+  city: Wheeling
+  state: WV
+  year_from: 1890
+  year_to: 1890
+  altitude_ft: 649.0
+  roof: open
+  surface: grass
+WIL01:
+  name: Union Street Park
+  city: Wilmington
+  state: DE
+  year_from: 1884
+  year_to: 1884
+  altitude_ft: 150.0
+  roof: open
+  surface: grass
+WIL02:
+  name: BB&T Ballpark at Bowman Field
+  city: Williamsport
+  state: PA
+  year_from: 2017
+  year_to: 2017
+  altitude_ft: 518.0
+  roof: open
+  surface: grass
+  dims:
+    lf_line_ft: 323.0
+    lf_gap_ft: 360.0
+    cf_ft: 411.0
+    rf_gap_ft: 375.0
+    rf_line_ft: 331.0
+  lf_short_porches: true
+WNY01:
+  name: West New York Field Club Grounds
+  city: West New York
+  state: NJ
+  year_from: 1898
+  year_to: 1899
+  altitude_ft: 175.0
+  roof: open
+  surface: grass
+WOR01:
+  name: Agricultural County Fair Grounds I
+  city: Worcester
+  state: MA
+  year_from: 1880
+  year_to: 1882
+  altitude_ft: 496.0
+  roof: open
+  surface: grass
+WOR02:
+  name: Agricultural County Fair Grounds II
+  city: Worcester
+  state: MA
+  year_from: 1887
+  year_to: 1887
+  altitude_ft: 496.0
+  roof: open
+  surface: grass
+WOR03:
+  name: Worcester Driving Park Grounds
+  city: Worcester
+  state: MA
+  year_from: 1874
+  year_to: 1874
+  altitude_ft: 496.0
+  roof: open
+  surface: grass
