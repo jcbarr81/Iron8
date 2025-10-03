@@ -10,6 +10,7 @@ _RATING_KEYS = {
     "gf",
     "pl",
     "sc",
+    "sp",  # speed is used to derive bat_speed_z
     "fa",
     "arm",
     "as",  # alias for arm in some sources
@@ -83,4 +84,3 @@ def load_players_csv(path: str) -> Dict[str, Dict]:
 
 def get_ratings_for(player_id: str, cache: Dict[str, Dict]) -> Optional[Dict]:
     return cache.get(player_id)
-

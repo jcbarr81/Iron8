@@ -16,6 +16,12 @@ See `docs/API_REFERENCE.md` for complete JSON contracts and examples.
 - `defense` (optional): `{ oaa_by_pos: {...}, arm_by_pos?: {...}, alignment?: { infield?: "in"|"dp"|"corners"|"normal", outfield?: "shallow"|"normal"|"deep" } }`
 - Ratings 0–99 inline are preferred for determinism. If omitted, the service tries to look up by `player_id` in `data/players.csv`.
 
+### Player Ratings Mapping (0–99)
+- Batter ratings in `players.csv` (0–99): `ch` (contact), `ph` (power), `gf` (GB tilt), `pl` (pull), `sc` (situational), `sp` (speed), `fa` (field), `arm` (throwing arm)
+- Pitcher ratings in `players.csv` (0–99): `arm` (velo), `endurance` (stamina), `control`, `movement`, `hold_runner`, pitch mix usage flags `fb, sl, si, cu, cb, scb, kn`
+- The engine converts 0–99 ratings to z-like features via `z_0_99` centered at 50 with scale 15 and clamps to [-3,3]. See `src/baseball_sim/features/transforms.py`.
+- If `ratings` are omitted in requests, the server auto-fills from `data/players.csv` by `player_id`.
+
 ## Pitch-by-Pitch Loop (Suggested)
 1) Build `state`, `batter`, `pitcher`, `defense`.
 2) Optional: call `/v1/sim/steal` and update bases/outs (handle PO/WP/PB).
@@ -37,11 +43,13 @@ See `docs/API_REFERENCE.md` for complete JSON contracts and examples.
 
 ## Seeds & Telemetry
 - Pass `seed` to make stochastic sampling deterministic.
-- Responses include `trace_id` for correlation; Plate‑appearance responses include simple `win_prob_home` and `leverage_index` as telemetry.
+- Responses include `trace_id` for correlation; Plate-appearance responses include simple `win_prob_home` and `leverage_index` as telemetry.
+- Optional calibration logging: set `PA_LOG_ENABLE=1` (and optionally `PA_LOG_PATH`) to log per-PA predicted probs and sampled events to `artifacts/pa_logs.csv`. These logs can help audit calibration quality over slices.
 
 ## Performance (Optional)
 - Train model: `python scripts/train_pa.py`
 - Calibrate: `python scripts/calibrate_pa.py`
+- Calibrate per-slice: `python scripts/calibrate_pa_sliced.py` (fits a sliced Platt calibrator by matchup x roof and writes `artifacts/pa_calibrator.joblib`); the server auto-loads it on startup.
 - Export ONNX: `python scripts/export_onnx.py`, set `model.use_onnx: true` in config to enable ONNX runtime.
 
 ## Pitch‑by‑Pitch Driver
