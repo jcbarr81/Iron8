@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Dict, Optional, Any
 import math
 import numpy as np
+from ..utils.parks import fence_at_angle
 
 
 INF_POS = ("3B", "SS", "2B", "1B", "P", "C")
@@ -78,6 +79,7 @@ class FieldingConverter:
         defense: Optional[Dict[str, int]],
         state: Dict[str, Any],
         seed: Optional[int] = None,
+        parks_cfg: Optional[Dict[str, Dict[str, Any]]] = None,
     ) -> Dict[str, Any]:
         rng = np.random.default_rng(seed) if seed is not None else np.random.default_rng()
 
@@ -100,6 +102,57 @@ class FieldingConverter:
                 "outs_recorded": 1,
                 "bases_ending": dict(bases),  # runners hold
             }
+
+        # HR/off-wall check using fence interpolation for air balls
+        if ctype in {"FB", "LD"} and parks_cfg is not None:
+            try:
+                park_id = state.get("park_id") if isinstance(state, dict) else None
+                fx = fence_at_angle(park_id, parks_cfg, spray)
+                fence_dist = fx.get("fence_dist_ft") if isinstance(fx, dict) else None
+                wall_h = fx.get("wall_height_ft") if isinstance(fx, dict) else None
+                if fence_dist is not None:
+                    # Simple carry heuristic from EV/LA with small weather/alt tweaks
+                    wind_mph = float(features.get("ctx_wind_mph", 0.0) or 0.0)
+                    wind_dir = float(features.get("ctx_wind_dir_deg", 0.0) or 0.0)
+                    tail = math.cos(math.radians(wind_dir))
+                    alt_ft = float(features.get("ctx_altitude_ft", 0.0) or 0.0)
+
+                    # LA contribution: benefit up to ~40 deg, then taper
+                    la_term = 0.0
+                    if la > 10.0:
+                        if la <= 40.0:
+                            la_term = 6.5 * (la - 10.0)
+                        else:
+                            la_term = max(0.0, 6.5 * 30.0 - 8.0 * (la - 40.0))
+                    carry_ft = 40.0 + 2.5 * ev + la_term + 1.5 * wind_mph * tail + 0.003 * alt_ft
+
+                    eff_fence = float(fence_dist)
+                    if wall_h is not None:
+                        try:
+                            eff_fence += 0.4 * float(wall_h)
+                        except Exception:
+                            pass
+
+                    if carry_ft >= eff_fence + 5.0:
+                        # Home run
+                        return {
+                            "out": False,
+                            "out_subtype": "HR",
+                            "hr": True,
+                            "dp": False,
+                            "outs_recorded": 0,
+                            "bases_ending": dict(bases),  # final bases handled by caller
+                            "error": False,
+                        }
+                    else:
+                        # Mark off-wall for caller context if near fence
+                        near = (carry_ft + 5.0) >= float(fence_dist)
+                        if near:
+                            # Continue to normal fielding but flag it
+                            bip_detail["off_wall"] = True
+            except Exception:
+                # If anything fails, fall back to normal processing
+                pass
 
         # Pick fielder by spray and contact type
         fielder = self._choose_fielder(ctype, spray)

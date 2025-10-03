@@ -204,6 +204,7 @@ def plate_appearance(req: SimRequest):
                 "outs": req.state.outs,
                 "bases": bases,
                 "weather": (req.state.weather.model_dump() if req.state.weather else {}),
+                "park_id": req.state.park_id,
             }
             field_res = _fielding.convert(
                 bip_detail=bip_detail,
@@ -211,9 +212,10 @@ def plate_appearance(req: SimRequest):
                 defense=req.defense or {},
                 state=state_for_fielding,
                 seed=req.seed,
+                parks_cfg=_PARKS_CFG,
             )
             # Merge fielding info into bip_detail
-            for k in ("out_subtype", "fielder", "dp", "sf", "error"):
+            for k in ("out_subtype", "fielder", "dp", "sf", "error", "hr"):
                 if k in field_res:
                     bip_detail[k] = field_res[k]
             advancement = {
@@ -221,11 +223,21 @@ def plate_appearance(req: SimRequest):
                 "bases_ending": field_res.get("bases_ending", bases),
                 "rbi": 0,
             }
+            # Home run handling: clear bases and count RBI
+            is_hr = bool(field_res.get("hr"))
+            if is_hr:
+                runners = int(bases.get("1B") is not None) + int(bases.get("2B") is not None) + int(
+                    bases.get("3B") is not None
+                )
+                advancement["rbi"] = runners + 1
+                advancement["outs_recorded"] = 0
+                advancement["bases_ending"] = {"1B": None, "2B": None, "3B": None}
+                bip_detail["out_subtype"] = "HR"
             # Sac fly credit
             if bool(field_res.get("sf")):
                 advancement["rbi"] = advancement.get("rbi", 0) + 1
             # If ball is not an out, attempt baserunning advancement (e.g., 3B -> home)
-            if not bool(field_res.get("out")):
+            if (not is_hr) and (not bool(field_res.get("out"))):
                 adv = _advancer.advance(
                     bip_detail=bip_detail,
                     fielding_result=field_res,
@@ -466,6 +478,7 @@ def pitch(req: PitchRequest):
                 "outs": req.state.outs,
                 "bases": bases,
                 "weather": (req.state.weather.model_dump() if req.state.weather else {}),
+                "park_id": req.state.park_id,
             }
             field_res = _fielding.convert(
                 bip_detail=bip_detail,
@@ -473,8 +486,9 @@ def pitch(req: PitchRequest):
                 defense=req.defense or {},
                 state=state_for_fielding,
                 seed=req.seed,
+                parks_cfg=_PARKS_CFG,
             )
-            for k in ("out_subtype", "fielder", "dp", "sf", "error"):
+            for k in ("out_subtype", "fielder", "dp", "sf", "error", "hr"):
                 if k in field_res:
                     bip_detail[k] = field_res[k]
             advancement = {
@@ -482,9 +496,18 @@ def pitch(req: PitchRequest):
                 "bases_ending": field_res.get("bases_ending", bases),
                 "rbi": 0,
             }
+            is_hr = bool(field_res.get("hr"))
+            if is_hr:
+                runners = int(bases.get("1B") is not None) + int(bases.get("2B") is not None) + int(
+                    bases.get("3B") is not None
+                )
+                advancement["rbi"] = runners + 1
+                advancement["outs_recorded"] = 0
+                advancement["bases_ending"] = {"1B": None, "2B": None, "3B": None}
+                bip_detail["out_subtype"] = "HR"
             if bool(field_res.get("sf")):
                 advancement["rbi"] = advancement.get("rbi", 0) + 1
-            if not bool(field_res.get("out")):
+            if (not is_hr) and (not bool(field_res.get("out"))):
                 adv = _advancer.advance(
                     bip_detail=bip_detail,
                     fielding_result=field_res,
