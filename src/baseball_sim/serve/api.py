@@ -25,6 +25,8 @@ from ..schemas import (
 from ..features.ratings_adapter import batter_features, pitcher_features
 from ..features.context_features import context_features
 from ..calibration.calibrators import IdentityCalibrator
+from ..calibration.slices import build_slice_meta, slice_key_from_meta
+from ..calibration.logger import maybe_log_pa
 from ..models.pa_model import PaOutcomeModel
 from ..models.bip_model import BipModel
 from ..models.advancement_model import FieldingConverter, BaserunningAdvancer
@@ -182,9 +184,18 @@ def plate_appearance(req: SimRequest):
         probs = _onnx_runner.predict_proba(feats)
     else:
         probs = _pa_model.predict_proba(feats)
-    probs = _calib.apply(probs, slice_meta=None)
+    try:
+        _slice_meta = build_slice_meta(req.state.model_dump(by_alias=True), req.batter.model_dump(), req.pitcher.model_dump(), _PARKS_CFG)
+        _slice_meta = {**_slice_meta, "slice_key": slice_key_from_meta(_slice_meta)}
+    except Exception:
+        _slice_meta = None
+    probs = _calib.apply(probs, slice_meta=_slice_meta)
 
     event = sample_event(probs, seed=req.seed)
+    try:
+        maybe_log_pa("plate-appearance", probs, event, _slice_meta or {})
+    except Exception:
+        pass
     # Compute simple win probability and leverage index
     wp_home = _wp_home(req.state.model_dump(by_alias=True))
     li = _lev_index(req.state.model_dump(by_alias=True))
@@ -579,6 +590,12 @@ def pitch(req: PitchRequest):
             bip_detail = bip_detail or None
             advancement = advancement or None
 
+    try:
+        _slice_meta_pitch = build_slice_meta(req.state.model_dump(by_alias=True), req.batter.model_dump(), req.pitcher.model_dump(), _PARKS_CFG)
+        _slice_meta_pitch = {**_slice_meta_pitch, "slice_key": slice_key_from_meta(_slice_meta_pitch)}
+        maybe_log_pa("pitch", sim.get("probs") or {}, result, _slice_meta_pitch)
+    except Exception:
+        pass
     return PitchResponse(
         pitch_type=pitch_type,
         result=result,

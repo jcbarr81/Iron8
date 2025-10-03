@@ -76,3 +76,32 @@ class MultiClassPlattCalibrator:
 
         s = float(sum(calibrated.values()) or 1.0)
         return {k: (v / s) for k, v in calibrated.items()}
+
+
+class SlicedPlattCalibrator:
+    """Wraps multiple MultiClassPlattCalibrators keyed by a slice string.
+
+    - `default_model` calibrates all traffic when no slice-specific model exists.
+    - `models_by_slice` maps slice_key -> MultiClassPlattCalibrator.
+    - `class_names` are the shared class labels.
+    - Slice selection uses `slice_meta` passed to apply().
+    """
+
+    def __init__(self, class_names: Optional[List[str]] = None):
+        self.class_names: List[str] = class_names or []
+        self.default_model: Optional[MultiClassPlattCalibrator] = None
+        self.models_by_slice: Dict[str, MultiClassPlattCalibrator] = {}
+
+    def apply(self, probs: Dict[str, float], slice_meta: Optional[Dict[str, str]] = None) -> Dict[str, float]:
+        # Select calibrator
+        model = None
+        if slice_meta and "slice_key" in slice_meta:
+            key = slice_meta.get("slice_key")
+            model = self.models_by_slice.get(str(key))
+        if model is None:
+            model = self.default_model
+        if model is None:
+            # Fallback: identity normalization
+            s = float(sum(probs.values()) or 1.0)
+            return {k: (float(v) / s) for k, v in probs.items()}
+        return model.apply(probs, slice_meta=None)
