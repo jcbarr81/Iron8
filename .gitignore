@@ -86,6 +86,7 @@ logs/
 tmp/
 !data/raw/seamheads_ballparks.csv
 !data/raw/park_dimensions.csv
+!data/derived/defense_ratings.csv
 
 # Environment/local config files
 .env.local
