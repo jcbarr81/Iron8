@@ -35,7 +35,7 @@ import uuid
 from ..features.transforms import z_0_99
 from ..sampler.rng import sample_event
 from ..utils.players import load_players_csv, get_ratings_for
-from ..utils.parks import load_parks_yaml, features_for_park
+from ..utils.parks import load_parks_yaml, features_for_park, fence_at_angle
 from ..utils.fatigue import apply_fatigue
 from ..serve.onnx_runtime import OnnxRunner
 from ..config import load_settings
@@ -214,6 +214,35 @@ def plate_appearance(req: SimRequest):
                 seed=req.seed,
                 parks_cfg=_PARKS_CFG,
             )
+            # Fallback HR check using fence profile if converter did not set it
+            if not bool(field_res.get("hr")) and bip_detail and isinstance(bip_detail, dict):
+                try:
+                    import math
+                    fx = fence_at_angle(req.state.park_id, _PARKS_CFG, float(bip_detail.get("spray_deg", 0.0) or 0.0))
+                    fence_dist = fx.get("fence_dist_ft") if isinstance(fx, dict) else None
+                    wall_h = fx.get("wall_height_ft") if isinstance(fx, dict) else None
+                    if fence_dist is not None:
+                        ev = float(bip_detail.get("ev_mph", 0.0) or 0.0)
+                        la = float(bip_detail.get("la_deg", 0.0) or 0.0)
+                        wind_mph = float(feats.get("ctx_wind_mph", 0.0) or 0.0)
+                        wind_dir = float(feats.get("ctx_wind_dir_deg", 0.0) or 0.0)
+                        alt_ft = float(feats.get("ctx_altitude_ft", 0.0) or 0.0)
+                        tail = math.cos(math.radians(wind_dir))
+                        la_term = 0.0
+                        if la > 10.0:
+                            if la <= 40.0:
+                                la_term = 6.5 * (la - 10.0)
+                            else:
+                                la_term = max(0.0, 6.5 * 30.0 - 8.0 * (la - 40.0))
+                        carry_ft = 40.0 + 2.5 * ev + la_term + 1.5 * wind_mph * tail + 0.003 * alt_ft
+                        eff_fence = float(fence_dist) + (0.4 * float(wall_h) if wall_h is not None else 0.0)
+                        if carry_ft >= eff_fence + 5.0:
+                            field_res["hr"] = True
+                            field_res["out"] = False
+                            field_res["outs_recorded"] = 0
+                            bip_detail["out_subtype"] = "HR"
+                except Exception:
+                    pass
             # Merge fielding info into bip_detail
             for k in ("out_subtype", "fielder", "dp", "sf", "error", "hr"):
                 if k in field_res:
@@ -488,6 +517,35 @@ def pitch(req: PitchRequest):
                 seed=req.seed,
                 parks_cfg=_PARKS_CFG,
             )
+            # Fallback HR check if needed
+            if not bool(field_res.get("hr")) and bip_detail and isinstance(bip_detail, dict):
+                try:
+                    import math
+                    fx = fence_at_angle(req.state.park_id, _PARKS_CFG, float(bip_detail.get("spray_deg", 0.0) or 0.0))
+                    fence_dist = fx.get("fence_dist_ft") if isinstance(fx, dict) else None
+                    wall_h = fx.get("wall_height_ft") if isinstance(fx, dict) else None
+                    if fence_dist is not None:
+                        ev = float(bip_detail.get("ev_mph", 0.0) or 0.0)
+                        la = float(bip_detail.get("la_deg", 0.0) or 0.0)
+                        wind_mph = float(feats.get("ctx_wind_mph", 0.0) or 0.0)
+                        wind_dir = float(feats.get("ctx_wind_dir_deg", 0.0) or 0.0)
+                        alt_ft = float(feats.get("ctx_altitude_ft", 0.0) or 0.0)
+                        tail = math.cos(math.radians(wind_dir))
+                        la_term = 0.0
+                        if la > 10.0:
+                            if la <= 40.0:
+                                la_term = 6.5 * (la - 10.0)
+                            else:
+                                la_term = max(0.0, 6.5 * 30.0 - 8.0 * (la - 40.0))
+                        carry_ft = 40.0 + 2.5 * ev + la_term + 1.5 * wind_mph * tail + 0.003 * alt_ft
+                        eff_fence = float(fence_dist) + (0.4 * float(wall_h) if wall_h is not None else 0.0)
+                        if carry_ft >= eff_fence + 5.0:
+                            field_res["hr"] = True
+                            field_res["out"] = False
+                            field_res["outs_recorded"] = 0
+                            bip_detail["out_subtype"] = "HR"
+                except Exception:
+                    pass
             for k in ("out_subtype", "fielder", "dp", "sf", "error", "hr"):
                 if k in field_res:
                     bip_detail[k] = field_res[k]
